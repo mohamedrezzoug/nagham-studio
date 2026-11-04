@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0e0b1a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="نغمة">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>نغمة – ستوديو المواهب الموسيقية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0b1a;--panel:#181331;--panel2:#221b42;--line:#30285a;--txt:#f1ecff;--mut:#a79fcc;--a1:#ff5fa2;--a2:#7c5cff;--a3:#22d3b6;--a4:#ffb547;--bad:#ff5b5b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Tajawal,system-ui,sans-serif;background:radial-gradient(1100px 600px at 85% -10%,#2d1c62 0,transparent 60%),radial-gradient(900px 500px at -10% 110%,#0f3b44 0,transparent 55%),var(--bg);background-attachment:fixed;color:var(--txt);min-height:100vh}
+header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(14,11,26,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;line-height:1.1}
+.logo .ic{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--a1),var(--a2));display:grid;place-items:center;font-size:20px;box-shadow:0 6px 20px rgba(124,92,255,.4)}
+.logo small{display:block;font-weight:500;font-size:12px;color:var(--mut)}
+.sp{flex:1}
+.btn{border:1px solid var(--line);background:var(--panel2);color:var(--txt);padding:9px 14px;border-radius:12px;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:var(--a2)}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:linear-gradient(135deg,var(--a2),var(--a1));border-color:transparent}
+.btn.on{background:var(--a1);border-color:var(--a1)}
+.btn.teal.on{background:var(--a3);border-color:var(--a3);color:#062b26}
+.btn.sm{padding:6px 10px;font-size:14px;border-radius:10px}
+.btn:disabled{opacity:.45;cursor:default}
+.rec.on{animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(255,95,162,.25)}}
+.vol{display:flex;align-items:center;gap:6px;color:var(--mut);font-size:14px}
+.vol input{width:90px}
+nav{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:none;border:0;background:transparent;color:var(--mut);font:inherit;font-weight:700;padding:9px 14px;border-radius:12px;cursor:pointer;white-space:nowrap}
+nav button.act{background:var(--panel2);color:var(--txt);box-shadow:inset 0 -2px 0 var(--a1)}
+main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
+section{display:none;animation:fade .25s}
+section.act{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+h2{margin:0 0 4px;font-size:23px}
+h3{margin:0 0 10px;font-size:17px}
+p{line-height:1.7}
+.mut{color:var(--mut)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+select{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font:inherit}
+input[type=range]{accent-color:var(--a1)}
+.lbl{font-size:13px;color:var(--mut);font-weight:700}
+.chip{display:inline-block;padding:3px 9px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--mut)}
+/* Home */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:center;padding:24px;background:linear-gradient(135deg,#271a55,#1a1336 60%,#122d35);border-radius:22px;border:1px solid var(--line);margin-bottom:16px;overflow:hidden;position:relative}
+.hero h1{font-size:34px;margin:0 0 8px;line-height:1.3}
+.hero h1 span{background:linear-gradient(90deg,var(--a1),var(--a4));-webkit-background-clip:text;background-clip:text;color:transparent}
+.eq{display:flex;gap:6px;align-items:flex-end;height:130px;justify-content:center}
+.eq i{width:14px;border-radius:7px;background:linear-gradient(var(--a1),var(--a2));animation:eq 1.2s ease-in-out infinite}
+@keyframes eq{0%,100%{height:20%}50%{height:100%}}
+.feat{cursor:pointer;transition:.15s}
+.feat:hover{transform:translateY(-3px);border-color:var(--a2)}
+.feat .big{font-size:32px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--panel2);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--a4)}
+/* Keyboard */
+.kbwrap{overflow-x:auto;padding-bottom:6px;direction:ltr}
+.kb{position:relative;height:210px;min-width:680px;direction:ltr;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:10px;overflow:hidden;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.key{position:absolute;top:0;border-radius:0 0 9px 9px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:9px;font-weight:700;transition:background .05s}
+.key.w{height:100%;background:linear-gradient(#fff,#ebe7f7);border:1px solid #9a94b5;color:#6a6480;font-size:12px}
+.key.b{height:61%;background:linear-gradient(#2c2545,#0b0915);color:#9d97b8;z-index:2;font-size:9px;border:1px solid #000;box-shadow:0 3px 4px rgba(0,0,0,.5)}
+.key.w.down{background:linear-gradient(#ffe1ef,#ff8fc2)}
+.key.b.down{background:linear-gradient(#9b82ff,#5434e0)}
+.key.next.w{background:linear-gradient(#e8fffb,#59e6cd)}
+.key.next.b{background:linear-gradient(#3fe0c5,#118a77)}
+.key.bad{background:linear-gradient(#ffd6d6,#ff6b6b)!important}
+.key .kc{position:absolute;bottom:30px;font-size:10px;opacity:.5}
+.insts .btn{min-width:92px;justify-content:center}
+/* Pads */
+.pads{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;margin:auto;touch-action:manipulation}
+.pad{aspect-ratio:1.25;border-radius:18px;border:0;cursor:pointer;color:#fff;font:inherit;font-weight:800;font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--c);box-shadow:inset 0 -6px 0 rgba(0,0,0,.25),0 6px 18px rgba(0,0,0,.3);transition:transform .06s,filter .06s;user-select:none}
+.pad small{font-size:11px;font-weight:500;opacity:.85}
+.pad .k{font-size:10px;opacity:.6}
+.pad.hit{transform:scale(.94);filter:brightness(1.35)}
+/* Sequencer */
+.seqwrap{overflow-x:auto;direction:ltr}
+.seq{display:grid;grid-template-columns:86px repeat(16,minmax(30px,1fr));gap:4px;min-width:640px}
+.seq .tl{font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;color:var(--mut);direction:rtl}
+.cell{height:30px;border-radius:7px;border:0;background:#2a2350;cursor:pointer;padding:0}
+.cell.q{background:#352c63}
+.cell.on{background:var(--c);box-shadow:0 0 10px var(--c)}
+.cell.ph{outline:2px solid #fff;outline-offset:-2px}
+.dots{display:flex;gap:10px;justify-content:center;margin:12px 0}
+.dots span{width:22px;height:22px;border-radius:50%;background:#2a2350;transition:.08s}
+.dots span.lit{background:var(--a3);box-shadow:0 0 14px var(--a3)}
+.dots span.lit.first{background:var(--a1);box-shadow:0 0 14px var(--a1)}
+/* Strings */
+.strings{position:relative;height:280px;direction:ltr;touch-action:none;user-select:none;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(90deg,#3b2112,#6b3f1f 20%,#7d4c26 50%,#6b3f1f 80%,#3b2112);box-shadow:inset 0 0 40px rgba(0,0,0,.6)}
+.strings:before{content:"";position:absolute;left:58%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(#1a0d05 55%,#c89a5b 57%,#1a0d05 62%,transparent 64%);opacity:.9}
+.str{flex:1;position:relative;cursor:pointer}
+.str i{position:absolute;left:0;right:0;top:50%;height:var(--t);transform:translateY(-50%);background:linear-gradient(#fff6dd,#b9a27a,#fff6dd);box-shadow:0 2px 3px rgba(0,0,0,.5)}
+.str.hit i{animation:vib .35s linear}
+@keyframes vib{0%,100%{transform:translateY(-50%)}20%{transform:translateY(-30%)}40%{transform:translateY(-70%)}60%{transform:translateY(-40%)}80%{transform:translateY(-60%)}}
+.str b{position:absolute;left:8px;top:50%;transform:translateY(-50%);z-index:2;background:rgba(0,0,0,.55);padding:2px 8px;border-radius:8px;font-size:12px;direction:rtl}
+.str em{position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:2;background:var(--a1);padding:1px 7px;border-radius:8px;font-size:11px;font-style:normal}
+.mq{display:flex;flex-wrap:wrap;gap:8px}
+.mqnotes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;direction:rtl}
+.mqnotes button{min-width:74px;padding:12px 8px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--txt);font:inherit;font-weight:700;cursor:pointer}
+.mqnotes button.q{border-color:var(--a4);color:var(--a4)}
+.mqnotes button.lit{background:var(--a3);color:#062b26}
+/* Voice */
+.tuner{display:grid;grid-template-columns:1fr 1.4fr;gap:14px}
+.notebig{font-size:64px;font-weight:800;text-align:center;line-height:1}
+.notebig.ok{color:var(--a3)}
+.hz{text-align:center;color:var(--mut)}
+.meter{position:relative;height:18px;border-radius:9px;background:linear-gradient(90deg,var(--bad),var(--a4) 35%,var(--a3) 45%,var(--a3) 55%,var(--a4) 65%,var(--bad));margin:14px 0 4px}
+.needle{position:absolute;top:-6px;width:4px;height:30px;background:#fff;border-radius:2px;left:50%;transition:left .08s;box-shadow:0 0 8px #fff}
+canvas{width:100%;display:block;border-radius:14px;background:#120e25}
+.holdbar{height:10px;border-radius:5px;background:#2a2350;overflow:hidden;margin-top:8px}
+.holdbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a3),var(--a4))}
+.notice{background:#3a2a10;border:1px solid #7a5a1e;color:#ffd99a;border-radius:12px;padding:10px 12px;margin:10px 0;line-height:1.7}
+/* Lessons */
+.songs{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.song{cursor:pointer;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}
+.song.sel{border-color:var(--a3);box-shadow:0 0 0 1px var(--a3)}
+.stars{color:var(--a4);letter-spacing:2px}
+.strip{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;direction:rtl}
+.strip span{padding:6px 9px;border-radius:9px;background:#2a2350;font-weight:700;font-size:14px;transition:.1s}
+.strip span.done{opacity:.35}
+.strip span.cur{background:var(--a3);color:#062b26;transform:scale(1.12)}
+/* Talent */
+.test{cursor:pointer}
+.test .score{font-weight:800;color:var(--a4)}
+.simon{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:320px;margin:14px auto}
+.simon button{aspect-ratio:1;border-radius:24px;border:0;background:var(--c);opacity:.45;cursor:pointer;transition:.08s}
+.simon button.lit{opacity:1;box-shadow:0 0 30px var(--c);transform:scale(1.04)}
+.tap{width:200px;height:200px;border-radius:50%;margin:16px auto;display:grid;place-items:center;font-size:24px;font-weight:800;background:radial-gradient(var(--a2),#3a2690);border:0;color:#fff;cursor:pointer;box-shadow:0 10px 40px rgba(124,92,255,.5);user-select:none;touch-action:manipulation}
+.tap.hit{transform:scale(.95);background:radial-gradient(var(--a1),#a02c63)}
+.bar{height:12px;border-radius:6px;background:#2a2350;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a2),var(--a1));border-radius:6px;transition:width .6s}
+.res-row{display:grid;grid-template-columns:140px 1fr 50px;gap:10px;align-items:center;margin:8px 0}
+.verdict{font-size:24px;font-weight:800;margin:6px 0}
+/* modal & toast */
+.modal{position:fixed;inset:0;background:rgba(5,3,12,.7);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.modal .card{max-width:560px;width:100%;max-height:85vh;overflow:auto}
+.take{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px;border-radius:12px;background:var(--panel2);margin-bottom:8px}
+.take audio{flex:1;min-width:200px;height:36px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--panel2);border:1px solid var(--a2);padding:10px 18px;border-radius:12px;z-index:60;transition:.25s;font-weight:700}
+#toast.show{transform:translateX(-50%) translateY(0)}
+.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+/* chord tones + fingers */
+.key.ct:after{content:"";position:absolute;bottom:32px;width:13px;height:13px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2)}
+.key.b.ct:after{bottom:20px;width:10px;height:10px;background:#b9a6ff}
+.key.w.ct{background:linear-gradient(#fff,#ddd2ff)}
+.key .fg{position:absolute;top:-2px;transform:translateY(0);width:22px;height:22px;border-radius:50%;background:var(--a4);color:#2a1a00;font-size:12px;display:grid;place-items:center;top:auto;bottom:52px}
+.key.b .fg{bottom:28px}
+.key.good.w{background:linear-gradient(#e8fffb,#59e6cd)}
+.nolab .key>span:first-child{visibility:hidden}
+/* band bar */
+body{padding-bottom:96px}
+#bandBar{position:fixed;bottom:0;left:0;right:0;z-index:25;display:flex;align-items:center;gap:12px;padding:10px 16px;background:rgba(20,15,40,.95);backdrop-filter:blur(12px);border-top:1px solid var(--line);flex-wrap:wrap}
+#bandBar.live{border-top-color:var(--a1);box-shadow:0 -6px 24px rgba(255,95,162,.15)}
+#bandBar .bcol{display:flex;flex-direction:column;gap:2px}
+#bandBar select{max-width:280px;padding:5px 8px;font-size:14px}
+.bplay{width:48px;height:48px;justify-content:center;font-size:20px;border-radius:50%;padding:0}
+.bchord{min-width:150px}
+.bchord b{font-size:20px;color:var(--a4);line-height:1.1}
+.bchord .mut{font-size:12px}
+.bdots{margin:0;gap:6px}
+.bdots span{width:14px;height:14px}
+.btempo input,.bvol input{width:110px}
+/* course */
+.units{display:flex;flex-wrap:wrap;gap:8px}
+.unit{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);cursor:pointer;font-weight:700;font-size:14px}
+.unit .n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#2a2350;font-size:12px}
+.unit.done .n{background:var(--a3);color:#062b26}
+.unit.cur{border-color:var(--a1);box-shadow:0 0 0 1px var(--a1)}
+.exp{margin-top:10px;padding:12px 14px;border-radius:14px;background:#120e25;border:1px solid var(--line);line-height:1.8}
+.exp p{margin:4px 0}
+.task{margin-top:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,#1d2a4a,#1f1840);border:1px solid #344a80}
+.donebox{margin-top:10px;padding:10px 14px;border-radius:12px;background:#0f3b33;border:1px solid var(--a3);color:#bff7ec;font-weight:700}
+.hand{display:block;margin:6px auto;max-width:240px}
+.nv{display:inline-flex;align-items:center;gap:6px;margin:4px 10px 4px 0;padding:4px 10px;border-radius:10px;background:var(--panel2)}
+.nv b{font-size:22px;color:var(--a4)}
+.fb{font-weight:800;min-height:26px;font-size:18px}
+.strip span.okp{background:var(--a3);color:#062b26}
+.strip span.okg{background:#2f8f7f}
+.strip span.miss{background:#6b2a3a}
+.strip span sub{font-size:10px;color:var(--a4);margin-right:3px}
+/* schools */
+.schools{margin-bottom:14px}
+.schools .btn{flex:1;justify-content:center;padding:12px}
+/* fretboard */
+.fbwrap{overflow-x:auto;margin-top:12px;direction:ltr}
+.fboard{min-width:720px;direction:ltr;user-select:none;touch-action:manipulation;border-radius:12px;overflow:hidden;background:linear-gradient(#4a2c16,#3a2010);box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.frow{display:flex;height:40px;position:relative}
+.frow.nums{height:24px;background:#120e25;color:var(--mut);font-size:11px}
+.frow.nums .fcell{border:0;align-items:center;justify-content:center;display:flex;gap:3px}
+.frow.nums em{color:var(--a4);font-style:normal;font-size:8px}
+.fnut{width:96px;flex:none;display:flex;align-items:center;gap:6px;padding:0 8px;background:#e9dcc0;color:#3a2010;font-size:12px;font-weight:700;cursor:pointer;border-right:6px solid #f7f2e6;direction:rtl}
+.fnut b{width:20px;text-align:center;font-size:14px}
+.fnut.tgo{background:#8ff0dc}.fnut.tgx{background:#f3b3b3}
+.fcell{flex:1;position:relative;border-right:3px solid #c9c2b2;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.fcell .str{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);background:linear-gradient(#fff5d8,#a8946a);pointer-events:none}
+.frow.hit .str{animation:vib .3s linear}
+.fcell .dot,.fcell .ghost{position:relative;z-index:2;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;pointer-events:none}
+.fcell .dot{background:var(--a1);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.fcell .dot.ok{background:var(--a3);color:#062b26}
+.fcell .ghost{border:3px dashed var(--a3);color:var(--a3);background:rgba(34,211,182,.12)}
+.fcell .dot+.ghost,.fcell .ghost+.dot{position:absolute}
+/* darbuka */
+.darbwrap{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:12px}
+.darb{width:280px;max-width:80vw;touch-action:manipulation;user-select:none;filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+.dz{cursor:pointer;transition:filter .08s}
+.dz.rim{fill:#b8862f;stroke:#7a5517;stroke-width:3}
+.dz.rim.r2{fill:#c99437}
+.dz.skin{stroke:#a07a3d;stroke-width:4}
+.dz.hit{filter:brightness(1.45) drop-shadow(0 0 12px #ffd27a)}
+.darb text{pointer-events:none;text-anchor:middle;font-family:Tajawal,sans-serif;font-weight:800}
+.darb .dl{font-size:22px;fill:#5a3a10}.darb .dl.lt{fill:#fff3d6}
+.darb .dk{font-size:12px;fill:#8a6a3a}.darb .dk.lt{fill:#ffe7b0}
+.dpat{display:flex;flex-wrap:wrap;gap:4px;margin:12px 0;direction:rtl}
+.dpat span{min-width:46px;padding:8px 4px 4px;border-radius:10px;text-align:center;font-weight:800;background:#2a2350;display:flex;flex-direction:column;font-size:15px;transition:.08s}
+.dpat span small{font-size:10px;color:var(--mut);font-weight:500}
+.dpat span.on{border-top:3px solid var(--a4)}
+.dpat span.doum{color:#ff8fbe}.dpat span.tek{color:#ffb089}.dpat span.ka{color:#ffd27a}.dpat span.rest{color:#5d5585}
+.dpat span.cur{transform:scale(1.12);background:#3b3270}
+.dpat span.okp{background:var(--a3);color:#062b26}.dpat span.okg{background:#2f8f7f;color:#fff}.dpat span.miss{background:#6b2a3a}
+/* workshop */
+.inp{width:100%;background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;margin-top:8px;resize:vertical;line-height:1.7}
+.karaoke{min-height:0;text-align:center;font-size:28px;font-weight:800;margin:12px 0;line-height:1.6}
+.karaoke span{opacity:.45;transition:.1s;margin:0 3px}
+.karaoke span.on{opacity:1;color:var(--a4);text-shadow:0 0 18px rgba(255,181,71,.5)}
+.cline{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;padding:8px;border-radius:12px;background:#120e25}
+.seg{border:1px solid var(--line);background:var(--panel2);color:var(--txt);border-radius:10px;padding:5px 9px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-width:54px;line-height:1.3}
+.seg b{font-size:16px}.seg span{font-size:12px;color:var(--a3)}.seg em{font-style:normal;font-size:11px;background:var(--a4);color:#2a1a00;border-radius:6px;padding:0 6px;margin-top:2px}
+.seg.sel{border-color:var(--a1);box-shadow:0 0 0 1px var(--a1)}
+.seg.play{background:var(--a2)}
+.seg.q span{color:var(--a4)}
+.key.sc:before{content:"";position:absolute;top:8px;width:9px;height:9px;border-radius:50%;background:var(--a3)}
+.saved{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--panel2);border-radius:10px;margin-bottom:6px}
+.chip.ma{background:#3a1d2a;border-color:#a33c63;color:#ffb3cf}
+@media(max-width:760px){.schools .btn{font-size:13px;padding:10px 6px}.karaoke{font-size:22px}}
+@media(max-width:760px){body{padding-bottom:130px}#bandBar{gap:6px 8px;padding:8px 10px}#bandBar .bvol,#bandHelp,#bandBar .bdots,#bandBar .bcol>.lbl:not(.keep){display:none}#bandBar select{max-width:none;width:calc(100vw - 90px)}#bandBar .bcol:nth-child(2){flex:1}.bplay{width:42px;height:42px}.btempo input{width:90px}.bchord{min-width:0;flex-direction:row!important;align-items:baseline;gap:6px!important}.bchord b{font-size:16px}#bandHL{padding:5px 8px;font-size:13px}}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero h1{font-size:26px}.eq{height:70px}.tuner{grid-template-columns:1fr}.logo small{display:none}.vol input{width:60px}.res-row{grid-template-columns:100px 1fr 40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><div class="ic">🎵</div><div>نغمة<small>ستوديو المواهب الموسيقية</small></div></div>
+  <div class="sp"></div>
+  <label class="vol">🔊<input id="vol" type="range" min="0" max="100" value="80"></label>
+  <button class="btn sm pri" id="installBtn" style="display:none">📲 ثبّت</button>
+  <button class="btn sm rec" id="recBtn" title="سجّل كل ما تعزفه">⏺ تسجيل</button>
+  <button class="btn sm" id="takesBtn">📁 <span id="takesN">0</span></button>
+</header>
+<nav id="nav">
+  <button data-tab="home" class="act">🏠 الرئيسية</button>
+  <button data-tab="course">🎓 تعلّم من الصفر</button>
+  <button data-tab="piano">🎹 البيانو والآلات</button>
+  <button data-tab="rhythm">🥁 الإيقاع</button>
+  <button data-tab="strings">🪕 الأوتار والمقامات</button>
+  <button data-tab="voice">🎤 الغناء</button>
+  <button data-tab="lessons">📚 الدروس</button>
+  <button data-tab="workshop">✍️ ورشة الإبداع</button>
+  <button data-tab="talent">🌟 اكتشف موهبتك</button>
+</nav>
+<main>
+
+<!-- HOME -->
+<section id="sec-home" class="act">
+  <div class="hero">
+    <div>
+      <h1>اكتشف <span>الفنان</span> اللي فيك</h1>
+      <p class="mut">ستوديو موسيقي كامل في جيبك: اعزف على البيانو والعود والقيثارة والناي، صنع إيقاعات مغربية بالدربوكة والبندير، درّب صوتك في الغناء، تعلّم ألحان بسيطة خطوة بخطوة، ودوز اختبارات باش تكتاشف موهبتك.</p>
+      <div class="row"><button class="btn pri" data-go="course">🎓 ابدأ التعلّم من الصفر</button><button class="btn" data-go="piano">🎹 اعزف بحرية</button><button class="btn" data-go="talent">🌟 اختبر موهبتك</button></div>
+    </div>
+    <div class="eq" aria-hidden="true"></div>
+  </div>
+  <div class="card"><div class="stats">
+    <div class="stat"><b id="stLessons">0</b><span class="mut">دروس مكمّلة</span></div>
+    <div class="stat"><b id="stStars">0</b><span class="mut">نجوم ⭐</span></div>
+    <div class="stat"><b id="stTalent">—</b><span class="mut">نتيجة الموهبة</span></div>
+    <div class="stat"><b id="stRange">—</b><span class="mut">مجال صوتك</span></div>
+    <div class="stat"><b id="stCourse">0/22</b><span class="mut">خطوات التعلّم</span></div>
+  </div></div>
+  <div class="grid" id="feats"></div>
+  <div class="card" style="margin-top:14px"><h3>💡 نصيحة اليوم</h3><p class="mut" id="tip" style="margin:0"></p></div>
+</section>
+
+<!-- COURSE -->
+<section id="sec-course">
+  <div class="row schools" id="schools"><button class="btn on" data-sch="piano">🎹 مدرسة البيانو</button><button class="btn" data-sch="guitar">🎸 مدرسة القيثارة</button><button class="btn" data-sch="darb">🪘 مدرسة الدربوكة</button></div>
+  <div id="sch-piano">
+  <div class="card">
+    <h2>🎓 مدرسة البيانو</h2>
+    <p class="mut" style="margin-top:0">8 خطوات قصيرة كتاخدك من "ما عمرّي قسيت البيانو" حتى العزف مع فرقة والارتجال. كل خطوة فيها شرح صغير ومهمة كتعاونك تفهم بيديك. ماشي ضروري تكملهم فنهار واحد 😉</p>
+    <div class="units" id="units"></div>
+  </div>
+  <div class="card" id="unitBox">
+    <div class="row"><h3 style="margin:0" id="uTitle"></h3><div class="sp"></div><button class="btn sm" id="uPrev">→ السابقة</button><button class="btn sm" id="uNext">التالية ←</button></div>
+    <div class="exp" id="uExp"></div>
+    <div class="task"><div class="row"><b>🎯 المهمة:</b><span id="uMsg"></span><div class="sp"></div><span class="chip" id="uProg"></span></div><div id="uArea"></div></div>
+    <div class="kbwrap" style="margin-top:12px"><div class="kb" id="kbCourse"></div></div>
+  </div>
+  </div>
+  <div id="sch-guitar" style="display:none">
+  <div class="card"><h2>🎸 مدرسة القيثارة</h2><p class="mut" style="margin-top:0">7 خطوات: الأوتار، الخانات، أول كورد، كوردات الأندلسي، الضرب بالريشة، والعزف مع الفرقة. الرسم هو زند القيثارة كيف كتشوفو انت: الوتر الرقيق (1) فالفوق.</p><div class="units" id="gUnits"></div></div>
+  <div class="card">
+    <div class="row"><h3 style="margin:0" id="gTitle"></h3><div class="sp"></div><button class="btn sm" id="gPrev">→ السابقة</button><button class="btn sm" id="gNext">التالية ←</button></div>
+    <div class="exp" id="gExp"></div>
+    <div class="task"><div class="row"><b>🎯 المهمة:</b><span id="gMsg"></span><div class="sp"></div><span class="chip" id="gProg"></span></div><div id="gArea"></div></div>
+    <div class="fbwrap"><div class="fboard" id="fboard"></div></div>
+    <div class="row" style="margin-top:10px"><button class="btn pri" id="gDown">⬇ ضربة لتحت</button><button class="btn pri" id="gUp">⬆ ضربة لفوق</button><button class="btn sm" id="gClear">✋ رفع الصوابع</button><span class="mut" style="font-size:13px">ضغط على خانة باش تحط صبع · ضغط على اسم الوتر باش تضربو · ⌨️ Space/↓ ضربة لتحت، ↑ لفوق، 1–6 الأوتار</span></div>
+  </div>
+  </div>
+  <div id="sch-darb" style="display:none">
+  <div class="card"><h2>🪘 مدرسة الدربوكة</h2><p class="mut" style="margin-top:0">7 خطوات: الضربات الثلاث، القراءة، المقسوم، البلدي، السعيدي، الحشو بالكا، والعزف مع الموسيقى. ضرب على الدربوكة بالصبع ولا بلوحة المفاتيح.</p><div class="units" id="dUnits"></div></div>
+  <div class="card">
+    <div class="row"><h3 style="margin:0" id="dTitle"></h3><div class="sp"></div><button class="btn sm" id="dPrev">→ السابقة</button><button class="btn sm" id="dNext">التالية ←</button></div>
+    <div class="exp" id="dExp"></div>
+    <div class="task"><div class="row"><b>🎯 المهمة:</b><span id="dMsg"></span><div class="sp"></div><span class="chip" id="dProg"></span></div><div id="dArea"></div></div>
+    <div class="darbwrap">
+      <svg class="darb" id="darb" viewBox="0 0 300 300" aria-label="الدربوكة من الفوق">
+        <defs><radialGradient id="skin" cx="50%" cy="45%"><stop offset="0" stop-color="#f6e7c8"/><stop offset="1" stop-color="#d9bf8f"/></radialGradient></defs>
+        <path class="dz rim" data-h="ka" d="M150,8 A142,142 0 0 0 150,292 L150,244 A94,94 0 0 1 150,56 Z"/>
+        <path class="dz rim r2" data-h="tek" d="M150,8 A142,142 0 0 1 150,292 L150,244 A94,94 0 0 0 150,56 Z"/>
+        <circle class="dz skin" data-h="doum" cx="150" cy="150" r="92" fill="url(#skin)"/>
+        <text x="150" y="146" class="dl">دوم</text><text x="150" y="168" class="dk">Space</text>
+        <text x="40" y="150" class="dl lt">كا</text><text x="40" y="170" class="dk lt">F</text>
+        <text x="260" y="150" class="dl lt">تك</text><text x="260" y="170" class="dk lt">J</text>
+      </svg>
+      <div class="mut" style="font-size:13px;line-height:1.8"><b>دوم</b> = الوسط باليد اليمنى (صوت غليظ)<br><b>تك</b> = الحافة باليمنى (صوت حاد)<br><b>كا</b> = الحافة باليسرى (صوت خفيف)</div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- WORKSHOP -->
+<section id="sec-workshop">
+  <div class="card"><h2>✍️ ورشة الإبداع</h2><p class="mut" style="margin:0">هنا كتجيب الموسيقى ديالك: حمّل أغنية من جهازك وعزف معاها، ولا كتب كلمات (شعر، زجل، أغنية…) ولحّنها، ومن بعد زيدها للدروس باش تتعلم تعزفها.</p></div>
+  <div class="card">
+    <h3>🎧 اعزف مع أغنية من جهازك</h3>
+    <p class="mut" style="margin-top:0">اختار ملف صوتي (MP3، M4A، WAV…). الأغنية كتبقى خدامة حتى ملي تمشي للبيانو ولا للدربوكة باش تعزف معاها. نقّص السرعة وكرّر مقطع باش تحفظو.</p>
+    <div class="row"><label class="btn pri">📂 اختار ملف صوتي<input type="file" id="wsFile" accept="audio/*" hidden></label><span class="chip" id="wsName">ما كاين حتى ملف</span></div>
+    <audio id="wsAudio" controls style="width:100%;margin-top:10px"></audio>
+    <div class="row" style="margin-top:8px"><span class="lbl">السرعة</span><select id="wsRate"><option value="0.5">50%</option><option value="0.75">75%</option><option value="0.9">90%</option><option value="1" selected>100%</option></select>
+      <button class="btn sm" id="wsA">⟦ بداية A</button><button class="btn sm" id="wsB">نهاية B ⟧</button><button class="btn sm" id="wsAB">✕</button><span class="chip" id="wsLoop">بلا تكرار</span>
+      <div class="sp"></div><span class="lbl">🎯 النغمة اللي كتسمع (تقريبي):</span><b id="wsNote" style="color:var(--a4);font-size:20px">—</b></div>
+  </div>
+  <div class="card">
+    <h3>📝 اكتب كلمات ولحّنها</h3>
+    <input id="cTitle" class="inp" placeholder="عنوان الأغنية">
+    <textarea id="cLyrics" class="inp" rows="4" placeholder="كتب كل بيت فسطر بوحدو.&#10;فرّق المقاطع بـ - باش كل مقطع ياخد نغمة بوحدو (مثال: يا-ليل يا-عين)"></textarea>
+    <div class="row" style="margin-top:8px">
+      <span class="lbl">المقام</span><select id="cMaq"></select>
+      <span class="lbl">القرار</span><select id="cRoot"></select>
+      <span class="lbl">الآلة</span><select id="cInst"><option value="piano">بيانو</option><option value="oud">عود</option><option value="ney">ناي</option><option value="guitar">قيثارة</option><option value="synth">سانتي</option></select>
+      <span class="lbl">الإيقاع</span><select id="cRhy"></select>
+      <span class="lbl">السرعة</span><input type="range" id="cBpm" min="50" max="160" value="92"><span class="chip" id="cBpmL">92</span>
+    </div>
+    <div class="row" style="margin-top:10px"><button class="btn pri" id="cGen">🎲 اقترح لحن</button><button class="btn" id="cStep">🎹 لحّن بيدّك</button><button class="btn pri" id="cPlay">▶ اسمع</button><button class="btn sm" id="cStop">⏹</button></div>
+    <div class="karaoke" id="cKar"></div>
+    <div id="cGrid"></div>
+    <div class="kbwrap" id="cKbWrap" style="display:none;margin-top:10px"><p class="mut" style="font-size:13px;margin:0 0 6px">اختار مقطع، ومن بعد ضغط على نغمة — كتمشي بوحدها للمقطع الموالي. النقط الخضرا = نغمات المقام. ضغط على الرقم الأصفر فالمقطع باش تبدل المدة.</p><div class="kb" id="kbW"></div></div>
+    <div class="row" style="margin-top:10px"><button class="btn" id="cSave">💾 احفظ</button><button class="btn" id="cToLesson">📚 زيدها للدروس</button><button class="btn" id="cExport">⬇️ صدّر</button><label class="btn">⬆️ استورد<input type="file" id="cImport" accept=".json,application/json" hidden></label><button class="btn sm" id="cNew">🆕 جديدة</button></div>
+    <div id="cSaved" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- PIANO -->
+<section id="sec-piano">
+  <div class="card">
+    <h2>البيانو والآلات</h2>
+    <p class="mut" style="margin-top:0">اختار الآلة واعزف بالضغط على المفاتيح، أو بلوحة المفاتيح ديال الحاسوب (A W S E D F T G Y H U J K…).</p>
+    <div class="row insts" id="insts"></div>
+  </div>
+  <div class="card">
+    <div class="row" style="margin-bottom:12px">
+      <button class="btn sm" id="octDown">◀ أوكتاف</button>
+      <span class="chip" id="octLbl">أوكتاف 4</span>
+      <button class="btn sm" id="octUp">أوكتاف ▶</button>
+      <div class="sp"></div>
+      <span class="lbl">الأسماء:</span>
+      <button class="btn sm on" data-lab="ar">دو ري مي</button>
+      <button class="btn sm" data-lab="lat">C D E</button>
+      <button class="btn sm teal" id="kcToggle">⌨️ الحروف</button>
+    </div>
+    <div class="kbwrap"><div class="kb" id="kbMain"></div></div>
+    <p class="mut" style="font-size:13px;margin-bottom:0">🎯 جرّب: دو – ري – مي – فا – صول… وسمع الفرق بين الآلات. الآلات الهوائية (الناي، الأورغ) كتبقى تصوّت ما دمت ضاغط.</p>
+  </div>
+</section>
+
+<!-- RHYTHM -->
+<section id="sec-rhythm">
+  <div class="card">
+    <h2>الإيقاع 🥁</h2>
+    <p class="mut" style="margin-top:0">ضرب على الطبول مباشرة (الأرقام 1 حتى 9 فلوحة المفاتيح)، أو صنع إيقاعك فالمُسلسِل.</p>
+    <div class="pads" id="pads"></div>
+  </div>
+  <div class="card">
+    <div class="row" style="margin-bottom:10px">
+      <h3 style="margin:0">صانع الإيقاعات</h3><div class="sp"></div>
+      <select id="preset"></select>
+      <button class="btn pri" id="seqPlay">▶ تشغيل</button>
+      <button class="btn sm" id="seqClear">🧹 مسح</button>
+    </div>
+    <div class="row" style="margin-bottom:12px"><span class="lbl">السرعة</span><input type="range" id="seqBpm" min="60" max="200" value="100"><span class="chip" id="seqBpmL">100 BPM</span></div>
+    <div class="seqwrap"><div class="seq" id="seq"></div></div>
+    <p class="mut" style="font-size:13px;margin-bottom:0">الإيقاعات الشرقية والمغربية بالدربوكة: <b>دوم</b> = ضربة الوسط الغليظة، <b>تك</b> = ضربة الحافة الحادة، <b>كا</b> = ضربة خفيفة باليد الأخرى. الأنماط هنا مبسّطة للتعلم.</p>
+  </div>
+  <div class="card">
+    <h3>⏱️ الميترونوم (ضابط الإيقاع)</h3>
+    <div class="row"><button class="btn pri" id="metPlay">▶ تشغيل</button><span class="lbl">السرعة</span><input type="range" id="metBpm" min="40" max="220" value="90"><span class="chip" id="metBpmL">90</span>
+    <span class="lbl">الضربات</span><select id="metBeats"><option>2</option><option>3</option><option selected>4</option><option>6</option></select></div>
+    <div class="dots" id="metDots"></div>
+  </div>
+</section>
+
+<!-- STRINGS -->
+<section id="sec-strings">
+  <div class="card">
+    <div class="row" style="margin-bottom:10px">
+      <h2 style="margin:0">الأوتار</h2><div class="sp"></div>
+      <button class="btn sm on" data-str="guitar">🎸 القيثارة</button>
+      <button class="btn sm" data-str="oud">🪕 العود</button>
+    </div>
+    <p class="mut" style="margin-top:0" id="strHelp">مرّر صبعك فوق الأوتار باش تعزف، واختار كورد (Accord) من التحت.</p>
+    <div class="strings" id="strs"></div>
+    <div class="row" style="margin-top:12px" id="chordRow"></div>
+  </div>
+  <div class="card">
+    <h3>🎼 المقامات العربية</h3>
+    <p class="mut" style="margin-top:0">المقام هو "الجو" ديال اللحن. بعض المقامات فيها <b style="color:var(--a4)">ربع الصوت</b> (½♭) اللي كيعطي الموسيقى العربية طابعها الخاص — ما كاينش فالبيانو العادي!</p>
+    <div class="mq" id="mqList"></div>
+    <div class="row" style="margin-top:12px">
+      <span class="lbl">القرار (البداية)</span><select id="mqRoot"></select>
+      <span class="lbl">الآلة</span><select id="mqInst"><option value="oud">العود</option><option value="ney">الناي</option><option value="piano">البيانو</option></select>
+      <button class="btn pri" id="mqPlay">▶ اسمع السلّم</button>
+    </div>
+    <p id="mqDesc" class="mut" style="margin-bottom:0"></p>
+    <div class="mqnotes" id="mqNotes"></div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="sec-voice">
+  <div class="card">
+    <div class="row"><h2 style="margin:0">الغناء 🎤</h2><div class="sp"></div><button class="btn pri" id="micBtn">🎙️ شغّل الميكروفون</button></div>
+    <div id="micNote" class="notice" style="display:none"></div>
+    <div class="tuner" style="margin-top:12px">
+      <div>
+        <div class="notebig" id="vNote">—</div>
+        <div class="hz" id="vHz">غنّي أي نغمة…</div>
+        <div class="meter"><div class="needle" id="vNeedle"></div></div>
+        <div class="row" style="justify-content:space-between;font-size:12px" ><span class="mut">منخفض</span><span class="mut" id="vCents">0 سنت</span><span class="mut">مرتفع</span></div>
+      </div>
+      <canvas id="pitchCv" width="700" height="240"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🎯 تحدي النغمة</h3>
+    <p class="mut" style="margin-top:0">اختار نغمة، سمعها، ومن بعد غنّيها وحافظ عليها ثانية ونص باش تربح نقطة.</p>
+    <div class="row" id="tgtRow"></div>
+    <div class="row" style="margin-top:10px"><span class="chip" id="tgtLbl">ما اخترتي حتى نغمة</span><span class="chip">النقط: <b id="tgtScore">0</b></span></div>
+    <div class="holdbar"><i id="holdBar"></i></div>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>📏 مجال صوتك</h3><p class="mut" style="margin-top:0">غنّي من أخفض نغمة حتى أعلى نغمة كتقدر عليها بلا تعب.</p>
+      <div class="verdict" id="rangeV">—</div><div class="mut" id="rangeT"></div>
+      <button class="btn sm" id="rangeReset" style="margin-top:8px">↺ عاود</button></div>
+    <div class="card"><h3>⏺ سجّل صوتك</h3><p class="mut" style="margin-top:0">سجّل غناءك وسمعو من بعد باش تلاحظ فين خاصك تتحسن.</p>
+      <button class="btn" id="vRecBtn">⏺ بدا التسجيل</button>
+      <p class="mut" style="font-size:13px">التسجيلات كتلقاها فـ 📁 الفوق.</p></div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section id="sec-lessons">
+  <div class="card">
+    <h2>الدروس 📚</h2>
+    <p class="mut" style="margin-top:0">اختار لحن، سمعو أولاً، ومن بعد تمرّن خطوة بخطوة (المفتاح الأخضر هو اللي خاصك تضغط عليه). ملي تحفظو، دوز لـ <b>🥁 اعزف مع الإيقاع</b>: الميترونوم كيعدّ 4 ضربات ومن بعد خاصك تضغط فالوقت. الدوائر الصفراء = رقم الصبع.</p>
+    <div class="songs" id="songs"></div>
+  </div>
+  <div class="card" id="lessonBox" style="display:none">
+    <div class="row"><h3 style="margin:0" id="lsTitle"></h3><div class="sp"></div>
+      <button class="btn" id="lsListen">🔊 اسمع</button><button class="btn pri" id="lsPractice">🎯 تمرّن خطوة بخطوة</button><button class="btn pri" id="lsAlong">🥁 اعزف مع الإيقاع</button><button class="btn sm" id="lsStop">⏹</button></div>
+    <div class="row" style="margin-top:8px"><span class="lbl">السرعة</span><select id="lsSpeed"><option value="0.6">بطيء جداً 🐢</option><option value="0.8" selected>بطيء</option><option value="1">عادي</option></select><label class="lbl"><input type="checkbox" id="lsGuide" checked> 🎵 اللحن المساعد</label><span class="fb" id="lsFb"></span></div>
+    <div class="strip" id="lsStrip"></div>
+    <div class="row"><span class="chip">الأخطاء: <b id="lsMist">0</b></span><span class="mut" id="lsMsg"></span></div>
+    <div class="kbwrap" style="margin-top:10px"><div class="kb" id="kbLesson"></div></div>
+  </div>
+</section>
+
+<!-- TALENT -->
+<section id="sec-talent">
+  <div class="card">
+    <h2>اكتشف موهبتك 🌟</h2>
+    <p class="mut" style="margin-top:0">أربع اختبارات قصيرة كيقيسو المهارات الأساسية ديال الموسيقي. ماشي امتحان — هي غير بوصلة كتورّيك منين تبدا.</p>
+    <div class="grid" id="tests"></div>
+  </div>
+  <div class="card" id="testArea" style="display:none"></div>
+  <div class="card" id="results"></div>
+</section>
+</main>
+
+<div id="bandBar">
+  <button class="btn pri bplay" id="bandPlay" title="شغّل الفرقة">▶</button>
+  <div class="bcol"><span class="lbl">🎼 الفرقة المرافقة</span><select id="bandStyle"></select></div>
+  <div class="bcol bchord"><span class="lbl">الكورد دابا</span><b id="bandChord">—</b><span class="mut" id="bandNext"></span></div>
+  <div class="dots bdots" id="bandDots"></div>
+  <div class="bcol btempo"><span class="lbl keep">السرعة <span class="chip" id="bandBpmL">84</span></span><input type="range" id="bandBpm" min="50" max="180" value="84"></div>
+  <div class="bcol bvol"><span class="lbl">صوت الفرقة</span><input type="range" id="bandVol" min="0" max="100" value="70"></div>
+  <button class="btn sm teal on" id="bandHL">💡 لوّن النغمات</button>
+  <button class="btn sm" id="bandHelp">؟</button>
+</div>
+
+<div class="modal" id="takesModal"><div class="card">
+  <div class="row"><h3 style="margin:0">📁 تسجيلاتي</h3><div class="sp"></div><button class="btn sm" id="takesClose">✕</button></div>
+  <p class="mut" style="font-size:13px">التسجيلات كتبقى غير فهاد الجلسة — حمّلها باش تحتافظ بيها.</p>
+  <div id="takesList"></div>
+</div></div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+/* ========== helpers ========== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const el=(html)=>{const t=document.createElement('template');t.innerHTML=html.trim();return t.content.firstElementChild;};
+const store={get(k,d){try{const v=localStorage.getItem('nagham_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('nagham_'+k,JSON.stringify(v))}catch(e){}}};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),2200);}
+const SOL=['دو','دو#','ري','ري#','مي','فا','فا#','صول','صول#','لا','لا#','سي'];
+const LAT=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const BLK=new Set([1,3,6,8,10]);
+let labelMode='ar';
+function nn(m,oct=true){m=Math.round(m);const i=((m%12)+12)%12,o=Math.floor(m/12)-1;return (labelMode==='ar'?SOL[i]:LAT[i])+(oct?o:'');}
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+
+/* ========== audio engine ========== */
+let ctx,master,bus,revSend,recDest,noiseBuf,vol=.8;
+function impulse(sec){const sr=ctx.sampleRate,n=Math.floor(sr*sec),b=ctx.createBuffer(2,n,sr);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.6);}return b;}
+function A(){
+  if(!ctx){
+    ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const comp=ctx.createDynamicsCompressor();comp.threshold.value=-12;comp.ratio.value=4;comp.attack.value=.003;comp.release.value=.2;
+    master=ctx.createGain();master.gain.value=vol;master.connect(comp);comp.connect(ctx.destination);
+    const conv=ctx.createConvolver();conv.buffer=impulse(2.2);revSend=ctx.createGain();revSend.gain.value=.16;revSend.connect(conv);conv.connect(master);
+    bus=ctx.createGain();bus.connect(master);bus.connect(revSend);
+    try{recDest=ctx.createMediaStreamDestination();comp.connect(recDest);}catch(e){recDest=null;}
+    noiseBuf=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  }
+  if(ctx.state==='suspended')ctx.resume();
+  return ctx;
+}
+const ksCache={};
+function ks(f,kind){
+  const sr=ctx.sampleRate,P=Math.max(8,Math.round(sr/f)),key=kind+P;
+  if(!ksCache[key]){
+    const N=Math.floor(sr*(kind==='oud'?1.8:2.6)),b=ctx.createBuffer(1,N,sr),d=b.getChannelData(0),damp=kind==='oud'?.993:.998;
+    let prev=0;for(let i=0;i<P;i++){let r=Math.random()*2-1;if(kind!=='oud'){r=(r+prev)*.5;prev=r;}d[i]=r;}
+    for(let i=P;i<N;i++)d[i]=damp*.5*(d[i-P]+d[i-P+1]);
+    let mx=0;for(let i=0;i<P*2;i++)mx=Math.max(mx,Math.abs(d[i]));if(mx>0)for(let i=0;i<N;i++)d[i]/=mx;
+    ksCache[key]=b;
+  }
+  return {buf:ksCache[key],rate:f*P/sr};
+}
+/* noteOn: returns handle with stop(at) */
+function noteOn(inst,f,vel=1,t,dest){
+  const c=A();t=t??c.currentTime;const out=c.createGain();out.connect(dest||bus);const srcs=[];let rel=.25,maxLen=14;
+  const osc=(type,fr,g,det=0,dest=out)=>{const o=c.createOscillator();o.type=type;o.frequency.value=fr;o.detune.value=det;const gg=c.createGain();gg.gain.value=g;o.connect(gg);gg.connect(dest);srcs.push(o);return o;};
+  const g=out.gain;
+  if(inst==='piano'){
+    const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(Math.min(10000,f*9),t);lp.frequency.exponentialRampToValueAtTime(Math.max(500,f*2.2),t+1.6);lp.connect(out);
+    osc('triangle',f,.9,0,lp);osc('sine',f*2,.32,2,lp);osc('sine',f*3,.1,-3,lp);osc('sine',f*4.01,.05,0,lp);
+    g.setValueAtTime(.0001,t);g.exponentialRampToValueAtTime(.42*vel,t+.006);g.exponentialRampToValueAtTime(.16*vel,t+.3);g.exponentialRampToValueAtTime(.0006,t+3.4);
+    rel=.3;maxLen=3.6;
+  }else if(inst==='organ'){
+    [[1,.5],[2,.28],[3,.16],[4,.1],[6,.05]].forEach(([h,a])=>osc('sine',f*h,a));
+    g.setValueAtTime(.0001,t);g.exponentialRampToValueAtTime(.32*vel,t+.025);rel=.09;
+  }else if(inst==='synth'){
+    const lp=c.createBiquadFilter();lp.type='lowpass';lp.Q.value=5;lp.frequency.setValueAtTime(f*8,t);lp.frequency.exponentialRampToValueAtTime(f*2.5,t+.4);lp.connect(out);
+    osc('sawtooth',f,.4,-9,lp);osc('sawtooth',f,.4,9,lp);osc('square',f/2,.15,0,lp);
+    g.setValueAtTime(.0001,t);g.exponentialRampToValueAtTime(.24*vel,t+.012);g.exponentialRampToValueAtTime(.15*vel,t+.3);rel=.2;
+  }else if(inst==='bass'){
+    const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=700;lp.connect(out);
+    osc('triangle',f,.8,0,lp);osc('sine',f,.6,0,lp);osc('sawtooth',f,.08,0,lp);
+    g.setValueAtTime(.0001,t);g.exponentialRampToValueAtTime(.55*vel,t+.01);g.exponentialRampToValueAtTime(.28*vel,t+.25);rel=.08;
+  }else if(inst==='ney'){
+    const o1=osc('sine',f,.8),o2=osc('sine',f*2,.12),o3=osc('triangle',f,.1);
+    const lfo=c.createOscillator();lfo.frequency.value=5.2;const lg=c.createGain();lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(f*.008,t+.5);lfo.connect(lg);[o1,o2,o3].forEach(o=>lg.connect(o.frequency));srcs.push(lfo);
+    const n=c.createBufferSource();n.buffer=noiseBuf;n.loop=true;const bp=c.createBiquadFilter();bp.type='bandpass';bp.frequency.value=f*2;bp.Q.value=.9;const ng=c.createGain();ng.gain.value=.09;n.connect(bp);bp.connect(ng);ng.connect(out);srcs.push(n);
+    g.setValueAtTime(.0001,t);g.exponentialRampToValueAtTime(.34*vel,t+.12);rel=.25;
+  }else{ /* oud / guitar plucked */
+    const k=ks(f,inst==='oud'?'oud':'gtr');const s=c.createBufferSource();s.buffer=k.buf;s.playbackRate.value=k.rate;
+    const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=inst==='oud'?2600:4200;
+    const pk=c.createBiquadFilter();pk.type='peaking';pk.frequency.value=inst==='oud'?220:110;pk.gain.value=5;
+    s.connect(lp);lp.connect(pk);pk.connect(out);srcs.push(s);
+    g.setValueAtTime(.55*vel,t);rel=.14;maxLen=inst==='oud'?1.8:2.6;
+  }
+  srcs.forEach(s=>{s.start(t);s.stop(t+maxLen);});
+  let stopped=false;
+  return {stop(at){if(stopped)return;stopped=true;at=Math.max(at??c.currentTime,c.currentTime);
+    if(g.cancelAndHoldAtTime)g.cancelAndHoldAtTime(at);else{g.cancelScheduledValues(at);g.setValueAtTime(Math.max(g.value,.0001),at);}
+    g.setTargetAtTime(0,at,rel/4);srcs.forEach(s=>{try{s.stop(at+rel+.1)}catch(e){}});}};
+}
+function tone(inst,f,t,dur,vel=1,dest){const c=A();t=t??c.currentTime;const h=noteOn(inst,f,vel,t,dest);h.stop(t+dur);return h;}
+function drum(name,t,vel=1,dest){
+  const c=A();t=t??c.currentTime;const g=c.createGain();g.connect(dest||bus);
+  const noise=dur=>{const s=c.createBufferSource();s.buffer=noiseBuf;s.start(t,Math.random()*.5,dur);return s;};
+  const sweep=(f1,f2,dt,type='sine',len=.8)=>{const o=c.createOscillator();o.type=type;o.frequency.setValueAtTime(f1,t);o.frequency.exponentialRampToValueAtTime(f2,t+dt);o.start(t);o.stop(t+len);return o;};
+  const dec=(node,peak,d)=>{const gg=c.createGain();gg.gain.setValueAtTime(peak*vel,t);gg.gain.exponentialRampToValueAtTime(.001,t+d);node.connect(gg);gg.connect(g);};
+  const filt=(node,type,f,q=1)=>{const b=c.createBiquadFilter();b.type=type;b.frequency.value=f;b.Q.value=q;node.connect(b);return b;};
+  switch(name){
+    case 'kick':dec(sweep(160,42,.13,'sine',.5),1.1,.45);break;
+    case 'snare':dec(filt(noise(.25),'highpass',1400),.55,.2);dec(sweep(230,160,.1,'triangle',.2),.4,.12);break;
+    case 'hat':dec(filt(noise(.08),'highpass',7500),.32,.05);break;
+    case 'clap':{const b=filt(noise(.3),'bandpass',1300,1.2);const gg=c.createGain();b.connect(gg);gg.connect(g);gg.gain.setValueAtTime(0,t);
+      [0,.012,.024].forEach(d=>{gg.gain.setValueAtTime(.7*vel,t+d);gg.gain.exponentialRampToValueAtTime(.05,t+d+.01);});gg.gain.setValueAtTime(.6*vel,t+.036);gg.gain.exponentialRampToValueAtTime(.001,t+.24);break;}
+    case 'doum':dec(sweep(125,72,.3,'sine',.65),1.05,.55);dec(filt(noise(.04),'lowpass',900),.3,.03);break;
+    case 'tek':dec(filt(noise(.08),'bandpass',3300,1.5),.85,.06);dec(sweep(950,720,.03,'sine',.07),.28,.045);break;
+    case 'ka':dec(filt(noise(.06),'bandpass',2300,2),.5,.045);break;
+    case 'bendir':dec(sweep(88,55,.35,'sine',.8),.95,.7);dec(filt(noise(.5),'bandpass',420,.7),.4,.42);break;
+    case 'tar':dec(filt(noise(.35),'highpass',6000),.32,.28);dec(filt(noise(.12),'bandpass',9000,4),.3,.15);dec(sweep(400,380,.05,'triangle',.1),.2,.05);break;
+    case 'click':dec(sweep(1000,1000,.01,'square',.05),.25,.03);break;
+    case 'clickHi':dec(sweep(1700,1700,.01,'square',.05),.35,.035);break;
+  }
+}
+/* chords + band state (used by keyboards) */
+const CH={C:[0,'maj'],Dm:[2,'min'],Em:[4,'min'],F:[5,'maj'],G:[7,'maj'],Am:[9,'min'],E:[4,'maj'],D:[2,'maj'],A:[9,'maj']};
+const CHAR={C:'دو',Dm:'ري صغير',Em:'مي صغير',F:'فا',G:'صول',Am:'لا صغير',E:'مي',D:'ري',A:'لا'};
+function chordPcs(n){const[r,q]=CH[n];return[r,(r+(q==='maj'?4:3))%12,(r+7)%12];}
+function chordMidis(n,low=55){return chordPcs(n).map(pc=>{let m=60+pc;while(m>low+12)m-=12;while(m<low)m+=12;return m;}).sort((a,b)=>a-b);}
+const band={on:false,style:null,bpm:88,step:0,bar:0,next:0,timer:null,queue:[],cur:null,nextCh:null,hl:true,listeners:new Set(),gain:null};
+function chime(){const c=A(),t=c.currentTime;[72,76,79,84].forEach((m,i)=>tone('piano',mtof(m),t+i*.08,.6,.7));}
+function buzz(){const c=A();tone('synth',110,c.currentTime,.18,.6);}
+
+/* ========== recording / downloads ========== */
+let dl=null;
+(async()=>{try{if(window.claude&&typeof window.claude.use==='function')dl=await window.claude.use('downloads');}catch(e){dl=null;}})();
+const takes=[];
+function pickMime(){if(!window.MediaRecorder)return null;for(const m of['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg'])if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))return m;return '';}
+function makeRecorder(stream,name,onStop){const mime=pickMime();if(mime===null)return null;let r;try{r=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);}catch(e){return null;}
+  const chunks=[];r.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
+  r.onstop=()=>{const type=r.mimeType||mime||'audio/webm';const blob=new Blob(chunks,{type});const ext=type.includes('mp4')?'mp4':'webm';
+    const d=new Date();takes.unshift({name:`${name} ${d.toLocaleTimeString('ar-MA',{hour:'2-digit',minute:'2-digit'})}`,blob,url:URL.createObjectURL(blob),ext});renderTakes();onStop&&onStop();toast('✅ التسجيل واجد فـ 📁');};
+  r.start();return r;}
+async function saveFile(blob,name){
+  if(dl){try{await dl.save({filename:name,data:blob});toast('✅ تحفظ');}catch(e){if(!e||e.code!=='declined')toast('ما قدرناش نحفظو الملف هنا');}return;}
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+}
+function renderTakes(){$('#takesN').textContent=takes.length;const L=$('#takesList');L.innerHTML=takes.length?'':'<p class="mut">مازال ما سجلتي والو. ضغط على ⏺ تسجيل الفوق وعزف.</p>';
+  takes.forEach((tk,i)=>{const r=el(`<div class="take"><b style="width:100%">🎧 ${tk.name}</b><audio controls src="${tk.url}"></audio><button class="btn sm">⬇️ تحميل</button></div>`);
+    r.querySelector('button').onclick=()=>saveFile(tk.blob,`nagham-${i+1}.${tk.ext}`);L.appendChild(r);});}
+let sessRec=null;
+$('#recBtn').onclick=()=>{A();
+  if(sessRec){sessRec.stop();sessRec=null;$('#recBtn').classList.remove('on');$('#recBtn').textContent='⏺ تسجيل';return;}
+  if(!recDest){toast('التسجيل ما مدعومش فهاد المتصفح');return;}
+  sessRec=makeRecorder(recDest.stream,'جلسة عزف');if(!sessRec){toast('التسجيل ما مدعومش فهاد المتصفح');return;}
+  $('#recBtn').classList.add('on');$('#recBtn').textContent='⏹ إيقاف';toast('🔴 كنسجلو كل ما تعزف…');};
+$('#takesBtn').onclick=()=>{renderTakes();$('#takesModal').classList.add('open');};
+$('#takesClose').onclick=()=>$('#takesModal').classList.remove('open');
+$('#takesModal').onclick=e=>{if(e.target.id==='takesModal')e.currentTarget.classList.remove('open');};
+$('#vol').oninput=e=>{vol=e.target.value/100;if(master)master.gain.value=vol;};
+
+/* ========== navigation ========== */
+const TABS=['home','course','piano','rhythm','strings','voice','lessons','workshop','talent'];
+let curTab='home';
+function show(id){if(!TABS.includes(id))id='home';curTab=id;$$('section').forEach(s=>s.classList.toggle('act',s.id==='sec-'+id));$$('#nav button').forEach(b=>b.classList.toggle('act',b.dataset.tab===id));
+  if(location.hash.slice(1)!==id){try{location.hash=id;}catch(e){}}if(id==='home')renderHome();if(id==='talent')renderResults();window.scrollTo(0,0);}
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(b)show(b.dataset.tab);};
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)show(g.dataset.go);});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&curTab==='course')setTimeout(()=>b.blur(),0);});
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(h&&h!==curTab)show(h);});
+
+/* ========== HOME ========== */
+const FEATS=[['course','🎓','تعلّم من الصفر','3 مدارس للمبتدئ: البيانو، القيثارة والدربوكة — خطوة بخطوة'],['workshop','✍️','ورشة الإبداع','اعزف مع أغانيك، اكتب كلمات ولحّنها وزيدها للدروس'],['piano','🎹','البيانو والآلات','6 آلات: بيانو، عود، قيثارة، ناي، أورغ وسانتي'],['rhythm','🥁','الإيقاع','دربوكة، بندير، طار ودرامز + صانع إيقاعات مغربية'],['strings','🪕','الأوتار والمقامات','عزف القيثارة بالكوردات واكتشاف المقامات العربية'],['voice','🎤','الغناء','مصحّح النغمة، تحدي الغناء، ومجال الصوت'],['lessons','📚','الدروس','ألحان بسيطة خطوة بخطوة مع النجوم'],['talent','🌟','اكتشف موهبتك','4 اختبارات: الأذن، الذاكرة، الإيقاع والصوت']];
+const TIPS=['تمرّن 15 دقيقة كل يوم أحسن من ساعتين مرة فالسيمانة.','قبل ما تغني، دفّي صوتك: همهم بفم مسدود (ممممم) من نغمة منخفضة لعالية.','الإيقاع هو أساس كل موسيقى: خدم مع الميترونوم ولو كنت كتعزف بالبيانو.','سجّل راسك وسمع: الأذن كتسمع حاجات فالتسجيل اللي ما كتلاحظهاش وانت كتعزف.','مقام البياتي من أكثر المقامات حضوراً فالأغاني الشعبية المغربية والعربية — جرّبو فقسم المقامات.','ابدأ بالسرعة البطيئة. السرعة كتجي من بعد مع الدقة.','الموهبة كتساعد، ولكن الاستمرار هو اللي كيصنع الفنان.'];
+function renderHome(){
+  const ls=store.get('lessons',{});$('#stLessons').textContent=Object.keys(ls).length;$('#stStars').textContent=Object.values(ls).reduce((a,b)=>a+b,0);
+  const ov=overall();$('#stTalent').textContent=ov==null?'—':ov+'%';
+  $('#stCourse').textContent=['course','gcourse','dcourse'].reduce((a,k)=>a+Object.keys(store.get(k,{})).length,0)+'/22';const r=store.get('range',null);$('#stRange').textContent=r?`${nn(r.min)} – ${nn(r.max)}`:'—';
+}
+(function initHome(){const eq=$('.eq');for(let i=0;i<14;i++){const b=document.createElement('i');b.style.animationDelay=(i*.09%1)+'s';b.style.animationDuration=(0.8+(i*37%10)/12)+'s';eq.appendChild(b);}
+  FEATS.forEach(([id,ic,t,d])=>$('#feats').appendChild(el(`<div class="card feat" data-go="${id}"><div class="big">${ic}</div><h3 style="margin:6px 0 4px">${t}</h3><div class="mut" style="font-size:14px">${d}</div></div>`)));
+  $('#tip').textContent=TIPS[new Date().getDate()%TIPS.length];})();
+
+/* ========== KEYBOARD component ========== */
+const KEYMAP={KeyA:0,KeyW:1,KeyS:2,KeyE:3,KeyD:4,KeyF:5,KeyT:6,KeyG:7,KeyY:8,KeyH:9,KeyU:10,KeyJ:11,KeyK:12,KeyO:13,KeyL:14,KeyP:15,Semicolon:16,Quote:17};
+const KEYLET=Object.fromEntries(Object.entries(KEYMAP).map(([k,v])=>[v,k==='Semicolon'?';':k==='Quote'?"'":k.slice(3)]));
+let showKc=false;
+const KBS=[];
+function hlKb(kb){const pcs=(band.on&&band.cur&&band.hl)?chordPcs(band.cur):[];kb.root.querySelectorAll('.key').forEach(k=>k.classList.toggle('ct',pcs.includes(+k.dataset.m%12)));}
+function applyChordHL(){KBS.forEach(hlKb);}
+function Keyboard(root,lo,hi,onDown,onUp){
+  const kb={lo,hi,root,fg:{}};KBS.push(kb);
+  kb.render=()=>{root.innerHTML='';const whites=[];for(let m=kb.lo;m<=kb.hi;m++)if(!BLK.has(m%12))whites.push(m);const n=whites.length;
+    whites.forEach((m,i)=>{const k=el(`<div class="key w" data-m="${m}"><span>${nn(m,m%12===0)}</span></div>`);k.style.left=(i/n*100)+'%';k.style.width=(100/n)+'%';root.appendChild(k);});
+    for(let m=kb.lo;m<=kb.hi;m++)if(BLK.has(m%12)){const wi=whites.indexOf(m-1);if(wi<0)continue;const k=el(`<div class="key b" data-m="${m}"><span>${labelMode==='ar'?'':nn(m,false)}</span></div>`);const w=.6/n*100;k.style.left=((wi+1)/n*100-w/2)+'%';k.style.width=w+'%';root.appendChild(k);}
+    kb.kc();kb.fingers(kb.fg);hlKb(kb);};
+  kb.fingers=map=>{kb.fg=map||{};root.querySelectorAll('.fg').forEach(x=>x.remove());for(const m in kb.fg){const k=root.querySelector(`[data-m="${m}"]`);if(k)k.appendChild(el(`<span class="fg">${kb.fg[m]}</span>`));}};
+  kb.flashBad=m=>{kb.mark(m,'bad');setTimeout(()=>kb.mark(m,'bad',false),280);};
+  kb.kc=()=>{root.querySelectorAll('.kc').forEach(x=>x.remove());if(!showKc||!kb.kcBase&&kb.kcBase!==0)return;for(const off in KEYLET){const k=root.querySelector(`[data-m="${kb.kcBase+ +off}"]`);if(k)k.appendChild(el(`<span class="kc">${KEYLET[off]}</span>`));}};
+  kb.press=(m,on)=>{const k=root.querySelector(`[data-m="${m}"]`);if(k)k.classList.toggle('down',on);};
+  kb.mark=(m,cls,on=true)=>{const k=root.querySelector(`[data-m="${m}"]`);if(k)k.classList.toggle(cls,on);};
+  kb.clear=cls=>root.querySelectorAll('.'+cls).forEach(k=>k.classList.remove(cls));
+  const act=new Map();
+  const keyAt=e=>{const t=document.elementFromPoint(e.clientX,e.clientY);const k=t&&t.closest&&t.closest('.key');return k&&root.contains(k)?+k.dataset.m:null;};
+  root.addEventListener('pointerdown',e=>{e.preventDefault();try{root.setPointerCapture(e.pointerId)}catch(_){}const m=keyAt(e);act.set(e.pointerId,m);if(m!=null)onDown(m);});
+  root.addEventListener('pointermove',e=>{if(!act.has(e.pointerId))return;const m=keyAt(e),o=act.get(e.pointerId);if(m!==o){if(o!=null)onUp(o);act.set(e.pointerId,m);if(m!=null)onDown(m);}});
+  const up=e=>{if(!act.has(e.pointerId))return;const o=act.get(e.pointerId);act.delete(e.pointerId);if(o!=null)onUp(o);};
+  root.addEventListener('pointerup',up);root.addEventListener('pointercancel',up);
+  kb.render();return kb;
+}
+
+/* ========== PIANO TAB ========== */
+const INSTS=[['piano','🎹','بيانو'],['oud','🪕','عود'],['guitar','🎸','قيثارة'],['ney','🎶','ناي'],['organ','🎛️','أورغ'],['synth','⚡','سانتي']];
+let inst='piano',oct=4;const pv={};
+function pDown(m,kb){if(pv[m])pv[m].stop();pv[m]=noteOn(inst,mtof(m));kb.press(m,true);}
+function pUp(m,kb){if(pv[m]){pv[m].stop();delete pv[m];}kb.press(m,false);}
+const kbMain=Keyboard($('#kbMain'),60,84,m=>pDown(m,kbMain),m=>pUp(m,kbMain));
+function setOct(o){oct=clamp(o,2,6);kbMain.lo=12*(oct+1);kbMain.hi=kbMain.lo+24;kbMain.kcBase=kbMain.lo;kbMain.render();$('#octLbl').textContent='أوكتاف '+oct;}
+setOct(4);
+INSTS.forEach(([id,ic,n])=>{const b=el(`<button class="btn ${id==='piano'?'on':''}" data-i="${id}">${ic} ${n}</button>`);b.onclick=()=>{inst=id;$$('#insts .btn').forEach(x=>x.classList.toggle('on',x===b));tone(id,mtof(60),null,.5);};$('#insts').appendChild(b);});
+$('#octDown').onclick=()=>setOct(oct-1);$('#octUp').onclick=()=>setOct(oct+1);
+$$('[data-lab]').forEach(b=>b.onclick=()=>{labelMode=b.dataset.lab;$$('[data-lab]').forEach(x=>x.classList.toggle('on',x===b));kbMain.render();kbL.render();renderMaqam();if(lesson.song)renderStrip();});
+$('#kcToggle').onclick=e=>{showKc=!showKc;e.currentTarget.classList.toggle('on',showKc);kbMain.kc();kbL.kc();};
+const held=new Set();
+document.addEventListener('keydown',e=>{
+  if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;if(e.target.matches('input,select,textarea'))return;
+  if(curTab==='rhythm'&&/^Digit[1-9]$/.test(e.code)){hitPad(+e.code.slice(5)-1);return;}
+  if(curTab==='talent'&&e.code==='Space'&&rt.active){e.preventDefault();rtTap();return;}
+  if(curTab==='course'&&curSch==='guitar'){if(e.code==='Space'||e.code==='ArrowDown'){e.preventDefault();gfb.strum(true);return;}if(e.code==='ArrowUp'){e.preventDefault();gfb.strum(false);return;}
+    if(/^Digit[1-6]$/.test(e.code)){const st=6-(+e.code.slice(5));A();gfb.pluck(st);if(gS.h&&gS.h.onEv)gS.h.onEv('nut',st,gfb.shape[st]);}return;}
+  if(curTab==='course'&&curSch==='darb'){const map={Space:'doum',KeyB:'doum',KeyJ:'tek',KeyK:'tek',KeyF:'ka',KeyD:'ka'};if(map[e.code]){e.preventDefault();dHit(map[e.code]);}return;}
+  if(curTab==='course'&&e.code==='Space'&&unitH&&unitH.onTap){e.preventDefault();unitH.onTap();return;}
+  const off=KEYMAP[e.code];if(off==null)return;
+  if(curTab==='piano'){const m=kbMain.lo+off;if(m>kbMain.hi)return;held.add(e.code+'|'+m);pDown(m,kbMain);}
+  else if(curTab==='lessons'){const m=kbL.kcBase+off;held.add(e.code+'|'+m);lessonDown(m);}
+  else if(curTab==='course'){const m=kbC.kcBase+off;held.add(e.code+'|'+m);cDown(m);}
+  else if(curTab==='workshop'&&cStepOn){const m=kbW.kcBase+off;if(m>kbW.hi)return;held.add(e.code+'|'+m);kbW.press(m,true);kbWDown(m);}
+});
+document.addEventListener('keyup',e=>{for(const h of[...held]){const[c,m]=h.split('|');if(c===e.code){held.delete(h);if(curTab==='lessons')lessonUp(+m);else if(curTab==='course')cUp(+m);else if(curTab==='workshop'){kbW.press(+m,false);if(wv[m]){wv[m].stop();delete wv[m];}}else pUp(+m,kbMain);}}});
+
+/* ========== RHYTHM TAB ========== */
+const PADS=[['doum','دوم','دربوكة','#e8457f'],['tek','تك','دربوكة','#f0784f'],['ka','كا','دربوكة','#e5a12b'],['bendir','بندير','إيقاع مغربي','#17a88f'],['tar','طار','رق / تعريجة','#2f9fd9'],['kick','كيك','درامز','#6a4ce6'],['snare','سنير','درامز','#9b52e8'],['hat','هاي-هات','درامز','#6aa82f'],['clap','تصفيق','يدّين','#c99a14']];
+PADS.forEach(([id,n,s,c],i)=>{const b=el(`<button class="pad" style="--c:${c}">${n}<small>${s}</small><span class="k">${i+1}</span></button>`);b.addEventListener('pointerdown',e=>{e.preventDefault();hitPad(i);});$('#pads').appendChild(b);});
+function hitPad(i){drum(PADS[i][0]);const p=$('#pads').children[i];p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),90);}
+const PRESETS={
+ 'مقسوم (شرقي)':{bpm:100,doum:[0,8],tek:[2,6,12],ka:[4,10,14]},
+ 'بلدي':{bpm:100,doum:[0,2,8],tek:[6,12],ka:[4,10,14]},
+ 'سعيدي':{bpm:108,doum:[0,6,8],tek:[2,12],ka:[4,10,14]},
+ 'ملفوف':{bpm:116,doum:[0,8],tek:[3,6,11,14]},
+ 'دقة شعبية مغربية (مبسطة)':{bpm:118,bendir:[0,6,8,14],tar:[3,4,11,12],clap:[4,12],ka:[2,10]},
+ 'بوب':{bpm:104,kick:[0,7,8],snare:[4,12],hat:[0,2,4,6,8,10,12,14]},
+ 'روك':{bpm:120,kick:[0,8,10],snare:[4,12],hat:[0,2,4,6,8,10,12,14]},
+ 'هيب-هوب':{bpm:88,kick:[0,3,10],snare:[4,12],hat:[0,2,4,6,8,10,11,12,14]},
+ 'فارغ (صنع إيقاعك)':{bpm:100}};
+const seq={grid:{},bpm:100,playing:false,step:0,next:0,timer:null,queue:[]};
+PADS.forEach(p=>seq.grid[p[0]]=new Array(16).fill(false));
+(function buildSeq(){const S=$('#seq');PADS.forEach(([id,n,,c])=>{S.appendChild(el(`<div class="tl">${n}</div>`));for(let s=0;s<16;s++){const b=el(`<button class="cell ${Math.floor(s/4)%2?'q':''}" style="--c:${c}" data-k="${id}" data-s="${s}"></button>`);b.onclick=()=>{seq.grid[id][s]=!seq.grid[id][s];b.classList.toggle('on',seq.grid[id][s]);if(seq.grid[id][s])drum(id);};S.appendChild(b);}});
+  Object.keys(PRESETS).forEach(k=>$('#preset').appendChild(el(`<option>${k}</option>`)));})();
+function loadPreset(name){const p=PRESETS[name];for(const k in seq.grid)seq.grid[k].fill(false);for(const k in p)if(k!=='bpm')p[k].forEach(s=>seq.grid[k][s]=true);setBpm(p.bpm);$$('.cell').forEach(c=>c.classList.toggle('on',seq.grid[c.dataset.k][+c.dataset.s]));}
+function setBpm(v){seq.bpm=+v;$('#seqBpm').value=v;$('#seqBpmL').textContent=v+' BPM';}
+$('#preset').onchange=e=>loadPreset(e.target.value);$('#seqBpm').oninput=e=>setBpm(e.target.value);
+$('#seqClear').onclick=()=>{$('#preset').value='فارغ (صنع إيقاعك)';loadPreset('فارغ (صنع إيقاعك)');};
+loadPreset('مقسوم (شرقي)');
+function seqTick(){while(seq.next<ctx.currentTime+.12){const st=seq.step;for(const k in seq.grid)if(seq.grid[k][st])drum(k,seq.next,st%4===0?1:.8);seq.queue.push([st,seq.next]);seq.next+=60/seq.bpm/4;seq.step=(st+1)%16;}}
+$('#seqPlay').onclick=()=>{A();if(seq.playing){seq.playing=false;clearInterval(seq.timer);seq.queue=[];setPlayhead(-1);$('#seqPlay').textContent='▶ تشغيل';return;}
+  bandStop();seq.playing=true;seq.step=0;seq.next=ctx.currentTime+.05;seqTick();seq.timer=setInterval(seqTick,25);$('#seqPlay').textContent='⏸ إيقاف';};
+function setPlayhead(st){$$('.cell.ph').forEach(c=>c.classList.remove('ph'));if(st>=0)$$(`.cell[data-s="${st}"]`).forEach(c=>c.classList.add('ph'));}
+const metro={on:false,bpm:90,beats:4,b:0,next:0,timer:null,queue:[]};
+function metDots(){$('#metDots').innerHTML='';for(let i=0;i<metro.beats;i++)$('#metDots').appendChild(document.createElement('span'));}
+metDots();
+function metTick(){while(metro.next<ctx.currentTime+.12){drum(metro.b===0?'clickHi':'click',metro.next);metro.queue.push([metro.b,metro.next]);metro.next+=60/metro.bpm;metro.b=(metro.b+1)%metro.beats;}}
+function setMetBeat(b){$$('#metDots span').forEach((s,i)=>{s.classList.toggle('lit',i===b);s.classList.toggle('first',i===0);});}
+$('#metPlay').onclick=()=>{A();if(metro.on){metro.on=false;clearInterval(metro.timer);metro.queue=[];setMetBeat(-1);$('#metPlay').textContent='▶ تشغيل';return;}
+  metro.on=true;metro.b=0;metro.next=ctx.currentTime+.05;metTick();metro.timer=setInterval(metTick,25);$('#metPlay').textContent='⏸ إيقاف';};
+$('#metBpm').oninput=e=>{metro.bpm=+e.target.value;$('#metBpmL').textContent=e.target.value;};
+$('#metBeats').onchange=e=>{metro.beats=+e.target.value;metro.b=0;metDots();};
+
+/* ========== BAND (accompaniment, everywhere) ========== */
+const ROCK=PRESETS['روك'],MAQS=PRESETS['مقسوم (شرقي)'];
+const drOnly=p=>{const o={};for(const k in p)if(k!=='bpm')o[k]=p[k];return o;};
+const STYLES=[
+ {t:'🎹 بوب سهل: دو – صول – لا ص – فا',bpm:84,prog:['C','G','Am','F'],dr:{kick:[0,7,8],snare:[4,12],hat:[0,2,4,6,8,10,12,14]},bass:[0,6,8],cs:[0,8],ci:'piano'},
+ {t:'🌙 هادئ: دو – لا ص – فا – صول',bpm:68,prog:['C','Am','F','G'],dr:{kick:[0,10],hat:[0,4,8,12],snare:[8]},bass:[0,10],pad:true},
+ {t:'🇲🇦 أندلسي مغربي: لا ص – صول – فا – مي',bpm:96,prog:['Am','G','F','E'],dr:{doum:[0,8],tek:[2,6,12],ka:[4,10,14],tar:[0,8]},bass:[0,8],cs:[0,6,8],ci:'guitar'},
+ {t:'🪘 شرقي مقسوم: لا ص – ري ص – مي – لا ص',bpm:92,prog:['Am','Dm','E','Am'],dr:drOnly(MAQS),bass:[0,8],pad:true},
+ {t:'🥁 دقة شعبية: لا ص – صول',bpm:116,prog:['Am','Am','G','G'],dr:{bendir:[0,6,8,14],tar:[3,4,11,12],clap:[4,12],ka:[2,10]},bass:[0,6,8,14],cs:[0,8],ci:'guitar'},
+ {t:'🎸 روك: دو – فا – صول – فا',bpm:112,prog:['C','F','G','F'],dr:drOnly(ROCK),bass:[0,2,4,6,8,10,12,14],cs:[0,8],ci:'guitar'},
+ ...Object.keys(PRESETS).filter(k=>!k.startsWith('فارغ')).map(k=>({t:'🥁 إيقاع فقط: '+k,bpm:PRESETS[k].bpm,prog:null,dr:drOnly(PRESETS[k])}))];
+(function initBand(){const S=$('#bandStyle');STYLES.forEach((s,i)=>S.appendChild(el(`<option value="${i}">${s.t}</option>`)));setBandStyle(0);
+  $('#bandDots').innerHTML='<span></span>'.repeat(4);})();
+function setBandStyle(i){band.style=STYLES[i];$('#bandStyle').value=i;setBandBpm(band.style.bpm);if(!band.style.prog){band.cur=null;band.nextCh=null;showBandChord();applyChordHL();}}
+function setBandBpm(v){band.bpm=+v;$('#bandBpm').value=v;$('#bandBpmL').textContent=v;}
+function bandTick(){const st=band.style,sd=60/band.bpm/4;
+  while(band.next<ctx.currentTime+.12){const s=band.step,t=band.next;
+    if(s===0&&st.prog){const ch=st.prog[band.bar%st.prog.length],nx=st.prog[(band.bar+1)%st.prog.length];
+      band.queue.push({t,type:'bar',ch,nx,bar:band.bar});
+      if(st.pad)chordMidis(ch).forEach(m=>tone('organ',mtof(m),t,sd*16*.97,.22,band.gain));}
+    if(st.prog){const ch=st.prog[band.bar%st.prog.length];
+      if(st.cs&&st.cs.includes(s))chordMidis(ch).forEach((m,k)=>tone(st.ci||'piano',mtof(m),t+k*(st.ci==='guitar'?.012:0),sd*3,.32,band.gain));
+      if(st.bass&&st.bass.includes(s))tone('bass',mtof(36+CH[ch][0]),t,sd*(st.pad?6:1.8),.9,band.gain);}
+    for(const k in st.dr)if(st.dr[k].includes(s))drum(k,t,s%4===0?.85:.65,band.gain);
+    if(s%4===0)band.queue.push({t,type:'beat',b:s/4});
+    band.next+=sd;band.step=(s+1)%16;if(band.step===0)band.bar++;}}
+function bandStart(){A();if(band.on)return;if(!band.gain){band.gain=ctx.createGain();band.gain.connect(bus);band.gain.gain.value=$('#bandVol').value/100;}
+  if(seq.playing)$('#seqPlay').click();
+  band.on=true;band.step=0;band.bar=0;band.queue=[];band.next=ctx.currentTime+.08;bandTick();band.timer=setInterval(bandTick,25);$('#bandPlay').textContent='⏸';$('#bandPlay').classList.add('on');$('#bandBar').classList.add('live');}
+function bandStop(){if(!band.on)return;band.on=false;clearInterval(band.timer);band.queue=[];band.cur=null;band.nextCh=null;showBandChord();applyChordHL();$$('#bandDots span').forEach(s=>s.classList.remove('lit'));$('#bandPlay').textContent='▶';$('#bandPlay').classList.remove('on');$('#bandBar').classList.remove('live');}
+function showBandChord(){$('#bandChord').textContent=band.cur?`${CHAR[band.cur]} (${band.cur})`:(band.on?'إيقاع':'—');$('#bandNext').textContent=band.nextCh?`← الجاي: ${CHAR[band.nextCh]}`:'';}
+function bandEvent(e){if(e.type==='beat'){$$('#bandDots span').forEach((s,i)=>{s.classList.toggle('lit',i===e.b);s.classList.toggle('first',i===0);});}
+  else{band.cur=e.ch;band.nextCh=e.nx;showBandChord();applyChordHL();if(followCh&&strMode==='guitar'){const c=CHORDS.find(x=>x[1]===e.ch);if(c&&c!==chord){chord=c;renderStrings();renderChordRow();}}band.listeners.forEach(f=>f(e));}}
+$('#bandPlay').onclick=()=>band.on?bandStop():bandStart();
+$('#bandStyle').onchange=e=>{setBandStyle(+e.target.value);if(band.on){bandStop();bandStart();}};
+$('#bandBpm').oninput=e=>setBandBpm(e.target.value);
+$('#bandVol').oninput=e=>{if(band.gain)band.gain.gain.value=e.target.value/100;};
+$('#bandHL').onclick=e=>{band.hl=!band.hl;e.currentTarget.classList.toggle('on',band.hl);applyChordHL();};
+$('#bandHelp').onclick=()=>toast('💡 النغمات الملوّنة بالبنفسجي هي نغمات الكورد اللي كتعزفو الفرقة دابا — أي وحدة فيهم غادي تبان مزيانة!');
+
+/* ========== STRINGS TAB ========== */
+let followCh=true;
+const STR={guitar:{tune:[40,45,50,55,59,64],kind:'guitar'},oud:{tune:[36,41,45,50,55,60],kind:'oud'}};
+const CHORDS=[['دو','C',[-1,3,2,0,1,0]],['صول','G',[3,2,0,0,0,3]],['لا صغير','Am',[-1,0,2,2,1,0]],['فا','F',[-1,-1,3,2,1,1]],['ري','D',[-1,-1,0,2,3,2]],['مي صغير','Em',[0,2,2,0,0,0]],['ري صغير','Dm',[-1,-1,0,2,3,1]],['مي','E',[0,2,2,1,0,0]],['لا','A',[-1,0,2,2,2,0]]];
+let strMode='guitar',chord=null;
+function strNote(i){const T=STR[strMode].tune;if(strMode==='guitar'&&chord){const f=chord[2][i];return f<0?null:T[i]+f;}return T[i];}
+function renderStrings(){const S=$('#strs');S.innerHTML='';for(let i=5;i>=0;i--){const m=strNote(i);const d=el(`<div class="str" data-i="${i}" style="--t:${1+ (5-i)*0.0+ (6-i)*0.7}px"><i></i><b>${m==null?'✕ صامت':nn(m)}</b>${strMode==='guitar'&&chord&&chord[2][i]>0?`<em>خانة ${chord[2][i]}</em>`:''}</div>`);if(m==null)d.style.opacity=.4;S.appendChild(d);}}
+function pluck(i,vel=.9){const m=strNote(i);const d=$(`#strs .str[data-i="${i}"]`);if(m==null||!d)return;noteOn(STR[strMode].kind,mtof(m),vel);d.classList.remove('hit');void d.offsetWidth;d.classList.add('hit');}
+(function strInput(){const S=$('#strs');const act=new Map();const at=e=>{const t=document.elementFromPoint(e.clientX,e.clientY);const s=t&&t.closest&&t.closest('.str');return s&&S.contains(s)?+s.dataset.i:null;};
+  S.addEventListener('pointerdown',e=>{e.preventDefault();A();try{S.setPointerCapture(e.pointerId)}catch(_){}const i=at(e);act.set(e.pointerId,i);if(i!=null)pluck(i);});
+  S.addEventListener('pointermove',e=>{if(!act.has(e.pointerId))return;const i=at(e);if(i!=null&&i!==act.get(e.pointerId)){act.set(e.pointerId,i);pluck(i,.75);}});
+  const up=e=>act.delete(e.pointerId);S.addEventListener('pointerup',up);S.addEventListener('pointercancel',up);})();
+function strum(down=true){A();const ord=down?[0,1,2,3,4,5]:[5,4,3,2,1,0];ord.forEach((i,k)=>setTimeout(()=>pluck(i,down?.85:.7),k*28));}
+function renderChordRow(){const R=$('#chordRow');R.innerHTML='';if(strMode!=='guitar'){R.appendChild(el(`<span class="mut">أوتار العود (من الغليظ للرقيق): دو – فا – لا – ري – صول – دو. العود ما فيهش "خانات" (Frettes)، داكشي علاش كيقدر يعزف ربع الصوت. جرّب المقامات التحت 👇</span>`));return;}
+  const open=el(`<button class="btn sm ${chord?'':'on'}">أوتار مفتوحة</button>`);open.onclick=()=>{chord=null;renderStrings();renderChordRow();};R.appendChild(open);
+  CHORDS.forEach(c=>{const b=el(`<button class="btn sm ${chord===c?'on':''}">${c[0]} <span class="mut">${c[1]}</span></button>`);b.onclick=()=>{chord=c;renderStrings();renderChordRow();strum(true);};R.appendChild(b);});
+  const fl=el(`<button class="btn sm teal ${followCh?'on':''}" title="الكورد كيتبدل بوحدو مع الفرقة">🔗 تبّع الفرقة</button>`);fl.onclick=()=>{followCh=!followCh;fl.classList.toggle('on',followCh);};R.appendChild(fl);
+  const sd=el(`<button class="btn sm pri">⬇ ضربة لتحت</button>`);sd.onclick=()=>strum(true);const su=el(`<button class="btn sm pri">⬆ ضربة لفوق</button>`);su.onclick=()=>strum(false);R.append(sd,su);}
+$$('[data-str]').forEach(b=>b.onclick=()=>{strMode=b.dataset.str;$$('[data-str]').forEach(x=>x.classList.toggle('on',x===b));$('#strHelp').textContent=strMode==='guitar'?'مرّر صبعك فوق الأوتار باش تعزف، واختار كورد (Accord) من التحت.':'العود هو "سلطان الآلات" فالموسيقى العربية. مرّر صبعك فوق الأوتار.';$('#mqInst').value=strMode==='oud'?'oud':$('#mqInst').value;renderStrings();renderChordRow();});
+renderStrings();renderChordRow();
+const MAQAMS=[
+ ['عجم',[0,2,4,5,7,9,11,12],'فرح وقوة وإشراق. كيشبه السلّم الكبير (Majeur) فالموسيقى الغربية — كثير فالأناشيد الوطنية وأغاني الأطفال.'],
+ ['نهوند',[0,2,3,5,7,8,11,12],'حنين ورومانسية. قريب من السلّم الصغير (Mineur) — كثير فالأغاني العاطفية.'],
+ ['كرد',[0,1,3,5,7,8,10,12],'حزن هادئ وبساطة. حاضر بزاف فالأغاني الشعبية والحديثة.'],
+ ['حجاز',[0,1,4,5,7,8,10,12],'روحانية وطابع شرقي قوي. المسافة الكبيرة بين النغمة 2 و 3 هي سرّ هاد المقام.'],
+ ['راست',[0,2,3.5,5,7,9,10.5,12],'"أب المقامات": فخامة وتوازن. فيه ربعين ديال الصوت (½♭) — سمع مزيان النغمة الثالثة والسابعة.'],
+ ['بياتي',[0,1.5,3,5,7,8,10,12],'دفء وقرب من القلب. من أكثر المقامات انتشاراً فالأغاني الشعبية والتراث. النغمة الثانية فيها ربع صوت.'],
+ ['صبا',[0,1.5,3,4,7,8,10,12],'حزن عميق وشجن. النغمة الرابعة "المنخفضة" كتعطيه طعم البكاء.']];
+let mq=MAQAMS[5],mqRoot=50;
+function qName(v){return Number.isInteger(v)?nn(v,false):nn(Math.ceil(v),false)+' ½♭';}
+function mqBase(){return mqRoot+($('#mqInst').value==='oud'?0:12);}
+function renderMaqam(){const L=$('#mqList');L.innerHTML='';MAQAMS.forEach(q=>{const b=el(`<button class="btn sm ${q===mq?'on':''}">${q[0]}${q[1].some(x=>!Number.isInteger(x))?' <span style="color:var(--a4)">½</span>':''}</button>`);b.onclick=()=>{mq=q;renderMaqam();playScale();};L.appendChild(b);});
+  const R=$('#mqRoot');if(!R.options.length){[[48,0],[50,2],[52,4],[53,5],[55,7],[57,9],[59,11]].forEach(([m])=>R.appendChild(el(`<option value="${m}">${nn(m,false)}</option>`)));R.value=mqRoot;}else[...R.options].forEach(o=>o.textContent=nn(+o.value,false));
+  $('#mqDesc').innerHTML=`<b>مقام ${mq[0]}:</b> ${mq[2]}`;
+  const N=$('#mqNotes');N.innerHTML='';mq[1].forEach((s,i)=>{const v=mqRoot+s;const b=el(`<button class="${Number.isInteger(s)?'':'q'}">${qName(v)}<br><small class="mut">${i+1}</small></button>`);b.onclick=()=>{tone($('#mqInst').value,mtof(mqBase()+s),null,.9);b.classList.add('lit');setTimeout(()=>b.classList.remove('lit'),300);};N.appendChild(b);});}
+let scaleTimers=[];
+function playScale(){A();scaleTimers.forEach(clearTimeout);scaleTimers=[];const ins=$('#mqInst').value,b=mqBase(),t0=ctx.currentTime+.05,seqn=[...mq[1],...mq[1].slice(0,-1).reverse()],btns=$$('#mqNotes button');
+  seqn.forEach((s,k)=>{tone(ins,mtof(b+s),t0+k*.36,.42);const idx=k<mq[1].length?k:mq[1].length-2-(k-mq[1].length);scaleTimers.push(setTimeout(()=>{btns.forEach(x=>x.classList.remove('lit'));btns[idx]&&btns[idx].classList.add('lit');},(k*.36+.05)*1000));});
+  scaleTimers.push(setTimeout(()=>btns.forEach(x=>x.classList.remove('lit')),(seqn.length*.36+.4)*1000));}
+$('#mqPlay').onclick=playScale;$('#mqRoot').onchange=e=>{mqRoot=+e.target.value;renderMaqam();};$('#mqInst').onchange=()=>renderMaqam();
+renderMaqam();
+
+/* ========== VOICE TAB (mic + pitch) ========== */
+const mic={on:false,an:null,buf:null,stream:null,hist:[],last:0,target:null,hold:0,score:0,stable:{m:null,since:0},rec:null};
+let pitchSink=null;
+function micMsg(txt){const n=$('#micNote');n.style.display=txt?'block':'none';n.innerHTML=txt||'';}
+async function micStart(){
+  A();if(mic.on)return true;
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){micMsg('🎙️ المتصفح ما كيسمحش بالميكروفون هنا. حلّ التطبيق فـ Chrome أو Safari من رابط GitHub Pages (https) باش يخدم الغناء.');return false;}
+  try{const s=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    mic.stream=s;const src=ctx.createMediaStreamSource(s);mic.an=ctx.createAnalyser();mic.an.fftSize=2048;src.connect(mic.an);mic.buf=new Float32Array(mic.an.fftSize);mic.on=true;micMsg('');
+    $('#micBtn').textContent='⏹ وقّف الميكروفون';$('#micBtn').classList.add('on');return true;}
+  catch(e){micMsg('🎙️ ما قدرناش نوصلو للميكروفون. إلا كنتي كتشوف التطبيق داخل المعاينة ديال المحادثة، الميكروفون ممنوع تما: حلّو فصفحة مستقلة أو من GitHub Pages، وعطي الإذن للمتصفح.');return false;}
+}
+function micStop(){if(mic.stream)mic.stream.getTracks().forEach(t=>t.stop());mic.on=false;mic.stream=null;$('#micBtn').textContent='🎙️ شغّل الميكروفون';$('#micBtn').classList.remove('on');if(mic.rec){mic.rec.stop();mic.rec=null;$('#vRecBtn').textContent='⏺ بدا التسجيل';}}
+$('#micBtn').onclick=()=>mic.on?micStop():micStart();
+function detectPitch(b,sr){
+  const N=b.length;let rms=0;for(let i=0;i<N;i++)rms+=b[i]*b[i];rms=Math.sqrt(rms/N);if(rms<.012)return -1;
+  const minLag=Math.floor(sr/1100),maxLag=Math.min(Math.floor(sr/65),N>>1),W=N-maxLag,d=new Float32Array(maxLag+2);
+  for(let tau=1;tau<=maxLag+1&&tau<N-W;tau++){let s=0;for(let j=0;j<W;j++){const x=b[j]-b[j+tau];s+=x*x;}d[tau]=s;}
+  let run=0;d[0]=1;for(let tau=1;tau<=maxLag+1;tau++){run+=d[tau];d[tau]=run?d[tau]*tau/run:1;}
+  let tau=-1;for(let t=minLag;t<=maxLag;t++){if(d[t]<.15){while(t+1<=maxLag&&d[t+1]<d[t])t++;tau=t;break;}}
+  if(tau<0){let mn=1,mi=-1;for(let t=minLag;t<=maxLag;t++)if(d[t]<mn){mn=d[t];mi=t;}if(mn>.3)return -1;tau=mi;}
+  const x0=d[tau-1],x1=d[tau],x2=d[tau+1],den=2*(2*x1-x2-x0);const bt=den?tau+(x2-x0)/den:tau;
+  return sr/bt;
+}
+function analyzeMic(dt){
+  mic.an.getFloatTimeDomainData(mic.buf);const f=detectPitch(mic.buf,ctx.sampleRate);
+  if(f>65&&f<1100){
+    const m=69+12*Math.log2(f/440),r=Math.round(m),cents=Math.round((m-r)*100);
+    mic.hist.push(m);if(pitchSink)pitchSink.push(f);
+    $('#vNote').textContent=nn(r);$('#vNote').classList.toggle('ok',Math.abs(cents)<15);$('#vHz').textContent=f.toFixed(1)+' Hz';$('#vCents').textContent=(cents>0?'+':'')+cents+' سنت';$('#vNeedle').style.left=(50+cents)+'%';
+    if(mic.stable.m===r){if(ctx.currentTime-mic.stable.since>.35)updateRange(r);}else mic.stable={m:r,since:ctx.currentTime};
+    if(mic.target!=null){let diff=m-mic.target;diff-=12*Math.round(diff/12);if(Math.abs(diff)<.3)mic.hold+=dt;else mic.hold=Math.max(0,mic.hold-dt*1.5);}
+  }else{mic.hist.push(null);if(mic.target!=null)mic.hold=Math.max(0,mic.hold-dt);mic.stable={m:null,since:0};}
+  if(mic.target!=null){$('#holdBar').style.width=clamp(mic.hold/1.5*100,0,100)+'%';if(mic.hold>=1.5){mic.hold=0;mic.score++;$('#tgtScore').textContent=mic.score;chime();toast('🎉 مزيان! نغمة مضبوطة');}}
+  if(mic.hist.length>240)mic.hist.shift();drawPitch();
+}
+function drawPitch(){const cv=$('#pitchCv'),g=cv.getContext('2d'),W=cv.width,H=cv.height;g.clearRect(0,0,W,H);
+  const vals=mic.hist.filter(v=>v!=null);let center=mic.target!=null?mic.target:(vals.length?vals.slice(-30).reduce((a,b)=>a+b,0)/Math.min(30,vals.length):60);center=Math.round(center);
+  const lo=center-9,hi=center+9,y=m=>H-(m-lo)/(hi-lo)*H;
+  g.font='12px Tajawal,sans-serif';g.textAlign='right';
+  for(let m=lo;m<=hi;m++){g.strokeStyle=BLK.has(((m%12)+12)%12)?'#1d1838':'#2c2552';g.lineWidth=1;g.beginPath();g.moveTo(0,y(m));g.lineTo(W-46,y(m));g.stroke();if(!BLK.has(((m%12)+12)%12)){g.fillStyle='#8a82b0';g.fillText(nn(m),W-4,y(m)+4);}}
+  if(mic.target!=null){g.fillStyle='rgba(34,211,182,.18)';g.fillRect(0,y(mic.target+.3),W-46,y(mic.target-.3)-y(mic.target+.3));}
+  g.strokeStyle='#ff5fa2';g.lineWidth=3;g.lineJoin='round';g.beginPath();let pen=false;const n=mic.hist.length;
+  mic.hist.forEach((v,i)=>{const x=(i+240-n)/240*(W-50);if(v==null||v<lo-3||v>hi+3){pen=false;return;}if(!pen){g.moveTo(x,y(v));pen=true;}else g.lineTo(x,y(v));});g.stroke();}
+drawPitch();
+function updateRange(r){const R=store.get('range',null)||{min:r,max:r};let ch=false;if(r<R.min){R.min=r;ch=true;}if(r>R.max){R.max=r;ch=true;}if(ch||!store.get('range',null)){store.set('range',R);}renderRange();}
+const VTYPES=[[0,'صوت منخفض (باص)'],[50,'باريتون'],[55,'تينور / ألتو منخفض'],[60,'ألتو / ميزو سوبرانو'],[64,'سوبرانو (صوت عالي)']];
+function renderRange(){const R=store.get('range',null);if(!R){$('#rangeV').textContent='—';$('#rangeT').textContent='شغّل الميكروفون وغنّي.';return;}
+  const span=R.max-R.min,mid=(R.max+R.min)/2;let vt=VTYPES[0][1];VTYPES.forEach(([m,n])=>{if(mid>=m)vt=n;});
+  $('#rangeV').textContent=`${nn(R.min)} ← ${nn(R.max)}`;$('#rangeT').innerHTML=`المجال: <b>${span}</b> نصف صوت (${(span/12).toFixed(1)} أوكتاف)${span>=6?` · نوع الصوت التقريبي: <b>${vt}</b>`:''}`;}
+renderRange();
+$('#rangeReset').onclick=()=>{store.set('range',null);try{localStorage.removeItem('nagham_range')}catch(e){}renderRange();};
+(function tgt(){const R=$('#tgtRow');[48,50,52,53,55,57,59,60,62,64,65,67,69].forEach(m=>{const b=el(`<button class="btn sm">${nn(m)}</button>`);b.onclick=async()=>{mic.target=m;mic.hold=0;$$('#tgtRow .btn').forEach(x=>x.classList.toggle('on',x===b));$('#tgtLbl').textContent='الهدف: '+nn(m)+' — غنّيها!';tone('piano',mtof(m),null,1.2);if(!mic.on)await micStart();};R.appendChild(b);});
+  const rnd=el(`<button class="btn sm pri">🎲 عشوائي</button>`);rnd.onclick=()=>R.children[Math.floor(Math.random()*13)].click();R.appendChild(rnd);
+  const rep=el(`<button class="btn sm">🔊 عاود سمع</button>`);rep.onclick=()=>{if(mic.target!=null)tone('piano',mtof(mic.target),null,1.2);};R.appendChild(rep);})();
+$('#vRecBtn').onclick=async()=>{if(mic.rec){mic.rec.stop();mic.rec=null;$('#vRecBtn').textContent='⏺ بدا التسجيل';return;}
+  if(!(await micStart()))return;mic.rec=makeRecorder(mic.stream,'صوتي');if(!mic.rec){toast('التسجيل ما مدعومش هنا');return;}$('#vRecBtn').textContent='⏹ وقّف التسجيل';};
+
+/* ========== LESSONS ========== */
+const C4=60;
+const SONGS=[
+ {id:'scale',t:'سلّم دو الكبير',s:'تمرين أساسي',lvl:1,bpm:96,n:[[60,1],[62,1],[64,1],[65,1],[67,1],[69,1],[71,1],[72,2],[71,1],[69,1],[67,1],[65,1],[64,1],[62,1],[60,2]]},
+ {id:'twinkle',t:'تلألأ يا نجيمات',s:'لحن تقليدي',lvl:1,bpm:100,n:[[60,1],[60,1],[67,1],[67,1],[69,1],[69,1],[67,2],[65,1],[65,1],[64,1],[64,1],[62,1],[62,1],[60,2],[67,1],[67,1],[65,1],[65,1],[64,1],[64,1],[62,2],[67,1],[67,1],[65,1],[65,1],[64,1],[64,1],[62,2],[60,1],[60,1],[67,1],[67,1],[69,1],[69,1],[67,2],[65,1],[65,1],[64,1],[64,1],[62,1],[62,1],[60,2]]},
+ {id:'clair',t:'في ضوء القمر',s:'أغنية فرنسية تقليدية',lvl:1,bpm:100,n:[[60,1],[60,1],[60,1],[62,1],[64,2],[62,2],[60,1],[64,1],[62,1],[62,1],[60,3]]},
+ {id:'mary',t:'ماري والخروف الصغير',s:'لحن تقليدي',lvl:2,bpm:110,n:[[64,1],[62,1],[60,1],[62,1],[64,1],[64,1],[64,2],[62,1],[62,1],[62,2],[64,1],[67,1],[67,2],[64,1],[62,1],[60,1],[62,1],[64,1],[64,1],[64,1],[64,1],[62,1],[62,1],[64,1],[62,1],[60,3]]},
+ {id:'jacques',t:'الأخ جاك',s:'لحن تقليدي (كانون)',lvl:2,bpm:110,n:[[72,1],[74,1],[76,1],[72,1],[72,1],[74,1],[76,1],[72,1],[76,1],[77,1],[79,2],[76,1],[77,1],[79,2],[79,.5],[81,.5],[79,.5],[77,.5],[76,1],[72,1],[79,.5],[81,.5],[79,.5],[77,.5],[76,1],[72,1],[72,1],[67,1],[72,2],[72,1],[67,1],[72,2]]},
+ {id:'ode',t:'نشيد الفرح',s:'بيتهوفن – السمفونية التاسعة',lvl:3,bpm:108,n:[[64,1],[64,1],[65,1],[67,1],[67,1],[65,1],[64,1],[62,1],[60,1],[60,1],[62,1],[64,1],[64,1.5],[62,.5],[62,2],[64,1],[64,1],[65,1],[67,1],[67,1],[65,1],[64,1],[62,1],[60,1],[60,1],[62,1],[64,1],[62,1.5],[60,.5],[60,2]]},
+ {id:'ma_andalus',ma:1,t:'نسيم الأندلس',s:'لحن أصلي بطابع أندلسي مغربي',lvl:2,bpm:84,band:2,n:[[69,1],[67,1],[65,1],[64,2],[65,1],[67,1],[69,1],[67,.5],[65,.5],[64,2],[64,1],[65,1],[68,1],[69,2],[71,1],[69,1],[68,1],[65,.5],[64,.5],[64,3]]},
+ {id:'ma_farah',ma:1,t:'دقة الفرح',s:'لحن أصلي بطابع شعبي مغربي',lvl:2,bpm:112,band:4,n:[[69,.5],[69,.5],[72,1],[71,.5],[69,.5],[67,1],[69,.5],[69,.5],[72,1],[74,1],[72,1],[71,.5],[72,.5],[71,.5],[69,.5],[67,1],[65,1],[64,.5],[65,.5],[67,.5],[65,.5],[64,2],[69,.5],[69,.5],[72,1],[71,.5],[69,.5],[67,1],[65,.5],[67,.5],[65,.5],[64,.5],[69,2]]},
+ {id:'ma_sahra',ma:1,t:'ليالي الصحراء',s:'لحن أصلي فمقام الحجاز',lvl:3,bpm:80,n:[[62,1],[63,1],[66,2],[67,1],[66,.5],[63,.5],[62,2],[66,1],[67,1],[69,2],[70,1],[69,.5],[67,.5],[66,2],[69,1],[67,.5],[66,.5],[63,1],[66,.5],[63,.5],[62,4]]},
+ {id:'ma_atlas',ma:1,t:'تهويدة الأطلس',s:'لحن أصلي هادئ (لا صغير)',lvl:2,bpm:76,n:[[64,1],[69,1],[69,1],[71,1],[72,2],[71,1],[69,1],[71,2],[67,1],[69,1],[65,3],[64,1],[64,1],[69,1],[69,1],[71,1],[72,2],[74,1],[72,1],[71,2],[68,1],[71,1],[69,4]]}];
+function allSongs(){return SONGS.concat(store.get('mysongs',[]));}
+const lesson={song:null,mode:null,idx:0,mist:0,timers:[]};
+const lv={};
+const kbL=Keyboard($('#kbLesson'),60,84,m=>lessonDown(m),m=>lessonUp(m));kbL.kcBase=60;kbL.kc();
+function renderSongs(){const S=$('#songs'),done=store.get('lessons',{});S.innerHTML='';allSongs().forEach(sg=>{const st=done[sg.id]||0;const d=el(`<div class="song ${lesson.song&&lesson.song.id===sg.id?'sel':''}"><b>${sg.ma?'🇲🇦 ':sg.my?'✍️ ':''}${sg.t}</b><div class="mut" style="font-size:13px">${sg.s}</div><div class="row" style="margin-top:6px;justify-content:space-between"><span class="chip">مستوى ${sg.lvl}</span><span class="stars">${'★'.repeat(st)}${'☆'.repeat(3-st)}</span></div></div>`);d.onclick=()=>selectSong(sg);S.appendChild(d);});}
+function selectSong(sg){lessonStop();lesson.song=sg;lesson.mode=null;lesson.idx=0;lesson.mist=0;$('#lessonBox').style.display='block';$('#lsTitle').textContent='🎵 '+sg.t;$('#lsMist').textContent=0;$('#lsMsg').textContent='ابدأ بـ "اسمع" باش تعرف اللحن.';$('#lsFb').textContent='';kbL.fingers(fingering(sg.n));renderStrip();renderSongs();$('#lessonBox').scrollIntoView({behavior:'smooth',block:'start'});}
+function renderStrip(){const S=$('#lsStrip');S.innerHTML='';const fg=fingering(lesson.song.n);lesson.song.n.forEach(([m],i)=>S.appendChild(el(`<span class="${i<lesson.idx&&lesson.mode==='practice'?'done':''} ${i===lesson.idx&&lesson.mode==='practice'?'cur':''}">${nn(m,false)}${fg[m]?`<sub>${fg[m]}</sub>`:''}</span>`)));}
+function markStrip(i,cls){const sp=$$('#lsStrip span');sp.forEach((s,k)=>{s.classList.toggle('cur',k===i);s.classList.toggle('done',cls==='practice'&&k<i);});}
+function lessonStop(){paStop();lesson.timers.forEach(clearTimeout);lesson.timers=[];kbL.clear('next');kbL.clear('down');if(lesson.mode==='listen')lesson.mode=null;}
+function lessonListen(){if(!lesson.song)return;lessonStop();A();lesson.mode='listen';const sg=lesson.song,beat=60/sg.bpm,t0=ctx.currentTime+.1;let t=0;
+  sg.n.forEach(([m,b],i)=>{tone('piano',mtof(m),t0+t,b*beat*.92);const at=t;lesson.timers.push(setTimeout(()=>{kbL.clear('down');kbL.press(m,true);markStrip(i);},(at+.1)*1000));lesson.timers.push(setTimeout(()=>kbL.press(m,false),(at+b*beat*.9+.1)*1000));t+=b*beat;});
+  lesson.timers.push(setTimeout(()=>{markStrip(-1);lesson.mode=null;$('#lsMsg').textContent='دابا نتا! ضغط على "تمرّن".';},(t+.3)*1000));$('#lsMsg').textContent='🎧 سمع مزيان…';}
+function lessonPractice(){if(!lesson.song)return;lessonStop();lesson.mode='practice';lesson.idx=0;lesson.mist=0;$('#lsMist').textContent=0;renderStrip();showNext();$('#lsMsg').textContent='ضغط على المفتاح الأخضر 👇';}
+function showNext(){kbL.clear('next');if(lesson.idx<lesson.song.n.length)kbL.mark(lesson.song.n[lesson.idx][0],'next');markStrip(lesson.idx,'practice');}
+function lessonDown(m){if(lv[m])lv[m].stop();lv[m]=noteOn('piano',mtof(m));kbL.press(m,true);if(pa.active){paKey(m);return;}
+  if(lesson.mode!=='practice')return;const exp=lesson.song.n[lesson.idx][0];
+  if(m===exp){lesson.idx++;if(lesson.idx>=lesson.song.n.length)finishLesson();else showNext();}
+  else{lesson.mist++;$('#lsMist').textContent=lesson.mist;kbL.mark(m,'bad');setTimeout(()=>kbL.mark(m,'bad',false),250);$('#lsStrip').classList.remove('shake');void $('#lsStrip').offsetWidth;$('#lsStrip').classList.add('shake');}}
+function lessonUp(m){if(lv[m]){lv[m].stop();delete lv[m];}kbL.press(m,false);}
+function finishLesson(){kbL.clear('next');markStrip(lesson.song.n.length,'practice');const stars=lesson.mist===0?3:lesson.mist<=3?2:1;const done=store.get('lessons',{});done[lesson.song.id]=Math.max(done[lesson.song.id]||0,stars);store.set('lessons',done);
+  lesson.mode=null;setTimeout(chime,300);$('#lsMsg').innerHTML=`<b style="color:var(--a4)">${'★'.repeat(stars)}</b> برافو! كمّلتي اللحن ${lesson.mist?`بـ ${lesson.mist} أخطاء`:'بلا حتى غلطة 👏'}`;renderSongs();}
+$('#lsListen').onclick=lessonListen;$('#lsAlong').onclick=lessonAlong;$('#lsPractice').onclick=lessonPractice;$('#lsStop').onclick=()=>{lessonStop();lesson.mode=null;markStrip(-1);$('#lsMsg').textContent='';};
+renderSongs();
+
+/* ========== PLAY-ALONG (timed) ========== */
+const WI=[0,-1,1,-1,2,3,-1,4,-1,5,-1,6];
+const whiteIdx=m=>WI[m%12]<0?null:Math.floor(m/12)*7+WI[m%12];
+function fingering(notes){const ms=[...new Set(notes.map(n=>n[0]))],wi=ms.map(whiteIdx);if(wi.some(x=>x==null))return{};const lo=Math.min(...wi),hi=Math.max(...wi);if(hi-lo>4)return{};const o={};ms.forEach((m,i)=>o[m]=wi[i]-lo+1);return o;}
+const pa={active:false,notes:[],timers:[],kb:null,strip:null,fb:null,onEnd:null};
+function paStop(){pa.timers.forEach(clearTimeout);pa.timers=[];if(pa.active&&pa.kb)pa.kb.clear('next');pa.active=false;}
+function playAlong(notes,kb,{bpm,guide=true,strip,fb,onEnd}){
+  paStop();A();const beat=60/bpm,t0=ctx.currentTime+.4+4*beat;Object.assign(pa,{kb,strip,fb,onEnd,active:true});
+  let t=0;pa.notes=notes.map(([m,b])=>{const n={m,t:t0+t*beat,d:b*beat,res:null};t+=b;return n;});const total=t;
+  for(let i=0;i<4;i++){const ti=t0-(4-i)*beat;drum(i===0?'clickHi':'click',ti);pa.timers.push(setTimeout(()=>{if(fb)fb.innerHTML=`<span style="color:var(--a4)">العدّ: ${i+1}</span>`;},Math.max(0,(ti-ctx.currentTime)*1000)));}
+  for(let k=0;k<Math.ceil(total);k++)drum(k%4===0?'clickHi':'click',t0+k*beat,.4);
+  if(guide)pa.notes.forEach(n=>tone('piano',mtof(n.m),n.t,n.d*.9,.25));
+  const spans=strip?[...strip.querySelectorAll('span')]:[];spans.forEach(sp=>sp.classList.remove('okp','okg','miss','cur','done'));
+  pa.notes.forEach((n,i)=>{
+    pa.timers.push(setTimeout(()=>{kb.clear('next');kb.mark(n.m,'next');spans.forEach((sp,k)=>sp.classList.toggle('cur',k===i));if(i===0&&fb)fb.textContent='🎹 دابا!';},Math.max(0,(n.t-ctx.currentTime-.15)*1000)));
+    pa.timers.push(setTimeout(()=>{if(!n.res&&spans[i])spans[i].classList.add('miss');},(n.t+Math.min(.35,n.d*.8+.1)-ctx.currentTime)*1000+30));});
+  pa.timers.push(setTimeout(paFinish,(t0+total*beat-ctx.currentTime+.4)*1000));}
+function paKey(m){const now=ctx.currentTime;let best=null;
+  for(const n of pa.notes){if(n.res||n.m!==m)continue;const dt=now-n.t;if(dt>-.3&&dt<Math.min(.35,n.d*.8+.1)&&(!best||Math.abs(dt)<Math.abs(now-best.t)))best=n;}
+  const spans=pa.strip?pa.strip.querySelectorAll('span'):[];
+  if(best){const dt=now-best.t;best.res=Math.abs(dt)<.12?'p':'g';const i=pa.notes.indexOf(best);if(spans[i])spans[i].classList.add(best.res==='p'?'okp':'okg');
+    if(pa.fb)pa.fb.innerHTML=best.res==='p'?'<span style="color:var(--a3)">✨ فالوقت!</span>':`<span style="color:#7fdccc">👍 ${dt<0?'بكري شوية':'معطّل شوية'}</span>`;}
+  else{pa.kb.flashBad(m);if(pa.fb)pa.fb.innerHTML='<span style="color:var(--bad)">✘ ماشي هادي</span>';}}
+function paFinish(){if(!pa.active)return;const n=pa.notes.length,p=pa.notes.filter(x=>x.res==='p').length,g=pa.notes.filter(x=>x.res==='g').length,sc=Math.round((p+g*.6)/n*100);
+  pa.active=false;pa.kb.clear('next');pa.timers.forEach(clearTimeout);pa.timers=[];if(pa.onEnd)pa.onEnd(sc,{p,g,miss:n-p-g,n});}
+function lessonAlong(){if(!lesson.song)return;lessonStop();lesson.mode='along';renderStrip();const sg=lesson.song;$('#lsMsg').textContent='استعد… الميترونوم غادي يعدّ 4 ضربات';
+  playAlong(sg.n,kbL,{bpm:Math.round(sg.bpm*+$('#lsSpeed').value),guide:$('#lsGuide').checked,strip:$('#lsStrip'),fb:$('#lsFb'),onEnd:(sc,st)=>{lesson.mode=null;const stars=sc>=90?3:sc>=70?2:sc>=40?1:0;
+    if(stars){const done=store.get('lessons',{});done[sg.id]=Math.max(done[sg.id]||0,stars);store.set('lessons',done);chime();renderSongs();}
+    $('#lsFb').textContent='';$('#lsMsg').innerHTML=`النتيجة: <b>${sc}%</b> ${stars?`<b style="color:var(--a4)">${'★'.repeat(stars)}</b>`:''} — فالوقت: ${st.p} · قريب: ${st.g} · فاتوك: ${st.miss}. ${sc<70?'جرّب سرعة أبطأ 🐢 ولا عاود "تمرّن خطوة بخطوة".':'برافو! 👏'}`;}});}
+
+/* ========== BEGINNER COURSE ========== */
+const cHeld=new Set(),cv={};let cRecent=[],unitH=null,curUnit=0,uTimers=[];
+function cDown(m){if(cv[m])cv[m].stop();cv[m]=noteOn('piano',mtof(m));kbC.press(m,true);cHeld.add(m);cRecent.push([m,performance.now()]);if(pa.active){paKey(m);return;}if(unitH&&unitH.onKey)unitH.onKey(m);}
+function cUp(m){if(cv[m]){cv[m].stop();delete cv[m];}kbC.press(m,false);cHeld.delete(m);}
+const kbC=Keyboard($('#kbCourse'),48,79,cDown,cUp);kbC.kcBase=60;kbC.kc();
+function playedPcs(win=1600){const now=performance.now();cRecent=cRecent.filter(r=>now-r[1]<win);return new Set([...cHeld,...cRecent.map(r=>r[0])].map(m=>m%12));}
+function hasChord(n){const s=playedPcs();return chordPcs(n).every(pc=>s.has(pc));}
+const VOICE={C:[60,64,67],F:[65,69,72],G:[67,71,74],Am:[69,72,76],Dm:[62,65,69],Em:[64,67,71],E:[64,68,71]};
+function markChord(n){kbC.clear('next');(VOICE[n]||chordMidis(n,60)).forEach(m=>kbC.mark(m,'next'));const v=VOICE[n];kbC.fingers(v?{[v[0]]:1,[v[1]]:3,[v[2]]:5}:{});}
+const ui={msg:h=>{$('#uMsg').innerHTML=h;},prog:(a,b)=>{$('#uProg').textContent=b?`${a} / ${b}`:'';},area:()=>$('#uArea'),
+  done(txt){const D=store.get('course',{});D[curUnit]=true;store.set('course',D);chime();renderUnits();
+    $('#uArea').insertAdjacentHTML('beforeend',`<div class="donebox">✅ ${txt} ${curUnit<UNITS.length-1?'<button class="btn sm pri" id="uGo" style="margin-right:8px">الخطوة الموالية ←</button>':'<br>🎓 كمّلتي المدرسة! دابا دوز للدروس واعزف مع الفرقة فأي قسم.'}</div>`);const g=$('#uGo');if(g)g.onclick=()=>openUnit(curUnit+1);}};
+const HAND=`<svg class="hand" viewBox="0 0 240 205" aria-label="اليد اليمنى وأرقام الأصابع"><g fill="#f0c7a3" stroke="#c98f68" stroke-width="2"><rect x="55" y="108" width="140" height="88" rx="36"/><rect x="14" y="98" width="34" height="78" rx="17" transform="rotate(-38 31 137)"/><rect x="62" y="38" width="28" height="96" rx="14"/><rect x="96" y="16" width="28" height="112" rx="14"/><rect x="130" y="26" width="28" height="106" rx="14"/><rect x="164" y="52" width="25" height="86" rx="12.5"/></g>
+<g font-family="Tajawal,sans-serif" font-weight="800" font-size="16" text-anchor="middle" fill="#2a1a00">${[[40,118,1],[76,60,2],[110,38,3],[144,48,4],[176,72,5]].map(([x,y,n])=>`<circle cx="${x}" cy="${y}" r="13" fill="#ffb547"/><text x="${x}" y="${y+5}">${n}</text>`).join('')}</g><text x="120" y="182" text-anchor="middle" font-family="Tajawal" font-size="14" fill="#7a4b2a">اليد اليمنى</text></svg>`;
+const UNITS=[
+ {t:'تعرّف على البيانو',ic:'🎹',exp:`<p>البيانو فيه مفاتيح <b>بيض</b> ومفاتيح <b>كحل</b>. المفاتيح الكحلة ديما مجموعين: <b>جوج</b> من بعدهم <b>ثلاثة</b>، وهاد الشكل كيتعاود على طول البيانو.</p><p>🔑 <b>السرّ:</b> النغمة <b>دو</b> هي المفتاح الأبيض اللي جا <b>على اليسار ديال جوج كحلين</b>. ملي كتعرف دو، كتعرف كلشي!</p>`,
+  start(){kbC.root.classList.add('nolab');const found=new Set();ui.msg('لقا وضغط على <b>جميع مفاتيح دو</b> (كاين 3)');ui.prog(0,3);
+   return{onKey(m){if(m%12===0){if(!found.has(m)){found.add(m);kbC.mark(m,'good');ui.prog(found.size,3);if(found.size===3){kbC.root.classList.remove('nolab');ui.done('برافو! دابا عرفتي فين كاين دو 🎉');}}}else if(found.size<3){kbC.flashBad(m);ui.msg(`لا، هادي <b>${nn(m,false)}</b>. قلّب على الأبيض اللي على يسار <b>جوج</b> كحلين`);}},cleanup(){kbC.root.classList.remove('nolab');}};}},
+ {t:'أسماء النغمات',ic:'🔤',exp:`<p>كاينين <b>7</b> ديال النغمات البيضاء: <b>دو – ري – مي – فا – صول – لا – سي</b>، ومن بعد كترجع <b>دو</b> من جديد (أعلى). هادشي سميتو <b>أوكتاف</b>.</p><p>💡 الحيلة: انطلق من دو وعدّ المفاتيح البيضاء على اليمين: دو(1) ري(2) مي(3)…</p>`,
+  start(){kbC.root.classList.add('nolab');const pcs=[0,2,4,5,7,9,11];let ok=0,tg=null;const nx=()=>{let p;do{p=pcs[Math.floor(Math.random()*7)];}while(p===tg);tg=p;ui.msg(`ضغط على <b style="font-size:20px;color:var(--a4)">${nn(60+tg,false)}</b> (أي واحدة فالبيانو)`);};
+   ui.area().innerHTML=`<button class="btn sm" id="u2show" style="margin-top:8px">👀 ورّيني الأسماء</button>`;$('#u2show').onclick=e=>{const h=kbC.root.classList.toggle('nolab');e.currentTarget.textContent=h?'👀 ورّيني الأسماء':'🙈 خبّي الأسماء';};
+   ui.prog(0,8);nx();return{onKey(m){if(ok>=8)return;if(m%12===tg){ok++;ui.prog(ok,8);kbC.mark(m,'good');setTimeout(()=>kbC.mark(m,'good',false),300);if(ok>=8){kbC.root.classList.remove('nolab');ui.done('ممتاز! حفظتي أسماء النغمات 🎵');}else nx();}else{kbC.flashBad(m);ui.msg(`هادي <b>${nn(m,false)}</b> — قلّب على <b style="color:var(--a4)">${nn(60+tg,false)}</b>`);}},cleanup(){kbC.root.classList.remove('nolab');}};}},
+ {t:'الأصابع ووضعية اليد',ic:'✋',exp:`${HAND}<p>كل صبع عندو رقم: <b>1</b> الإبهام، <b>2</b> السبابة، <b>3</b> الوسطى، <b>4</b> البنصر، <b>5</b> الخنصر.</p><p>✋ <b>الوضعية:</b> حطّ الإبهام (1) ديال اليد اليمنى على <b>دو</b> الوسطى، وكل صبع على مفتاح: 1=دو، 2=ري، 3=مي، 4=فا، 5=صول. خلي اليد <b>مقوّسة</b> بحال إلا شادّ كورة صغيرة، والمعصم مرتاح.</p><p>⌨️ فالحاسوب تقدر تستعمل الحروف: A S D F G.</p>`,
+  start(){const seqn=[60,62,64,65,67,65,64,62,60,64,67,64,60],F={60:1,62:2,64:3,65:4,67:5};kbC.fingers(F);let i=0;const show=()=>{kbC.clear('next');kbC.mark(seqn[i],'next');ui.msg(`الصبع <b style="font-size:20px;color:var(--a4)">${F[seqn[i]]}</b> ← ${nn(seqn[i],false)}`);ui.prog(i,seqn.length);};show();
+   return{onKey(m){if(i>=seqn.length)return;if(m===seqn[i]){i++;if(i>=seqn.length){kbC.clear('next');ui.prog(i,seqn.length);ui.done('يديك بداو كيتعلمو الطريق 👐');}else show();}else kbC.flashBad(m);}};}},
+ {t:'الإيقاع والعدّ',ic:'🥁',exp:`<p>كل موسيقى عندها <b>نبض</b> بحال دقات القلب. كنعدّوه: <b>1 – 2 – 3 – 4</b>، 1 – 2 – 3 – 4… (الضربة 1 هي الأقوى).</p><p>مدة النغمة كتتحسب بالضربات: <span class="nv"><b>♩</b> سوداء = ضربة</span><span class="nv"><b>𝅗𝅥</b> بيضاء = 2 ضربات</span><span class="nv"><b>𝅝</b> مستديرة = 4 ضربات</span></p>`,
+  start(){ui.msg('سمع 4 ضربات ديال العدّ، ومن بعد اضرب <b>مع</b> الكليك 8 مرات (الدائرة، أي مفتاح، ولا Space)');ui.prog(0,0);
+   ui.area().innerHTML=`<div class="row" style="justify-content:center;margin-top:10px"><button class="btn pri" id="u4go">▶ ابدأ</button></div><button class="tap" id="u4pad">اضرب</button><div class="dots" id="u4dots">${'<span></span>'.repeat(12)}</div><p class="fb" id="u4fb" style="text-align:center"></p>`;
+   let taps=[],on=false;const tap=()=>{if(!on)return;taps.push(ctx.currentTime);drum('tek');const p=$('#u4pad');p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),80);};
+   $('#u4pad').addEventListener('pointerdown',e=>{e.preventDefault();A();tap();});
+   $('#u4go').onclick=()=>{A();taps=[];on=true;const P=60/76,t0=ctx.currentTime+.5,dots=$$('#u4dots span');
+     for(let b=0;b<12;b++){drum(b%4===0?'clickHi':'click',t0+b*P);uTimers.push(setTimeout(()=>{dots.forEach((d,k)=>{d.classList.toggle('lit',k===b);d.classList.toggle('first',k<4);});$('#u4fb').textContent=b<4?`العدّ: ${b+1}`:'اضرب!';},(t0-ctx.currentTime+b*P)*1000));}
+     uTimers.push(setTimeout(()=>{on=false;const errs=[];for(let b=4;b<12;b++){const exp=t0+b*P;let best=null;taps.forEach(tp=>{const e=Math.abs(tp-exp);if(e<P/2&&(best==null||e<best))best=e;});errs.push(best==null?.3:best);}
+       const mean=Math.round(errs.reduce((a,b)=>a+b,0)/8*1000);if(mean<110){$('#u4fb').innerHTML=`معدل الفرق ${mean} ميلي ثانية 👌`;ui.done('عندك إحساس بالنبض!');}else $('#u4fb').innerHTML=`معدل الفرق ${mean} ميلي ثانية — سمع الكليك مزيان، وعاود 🔁`;},(t0-ctx.currentTime+12*P+.4)*1000));};
+   return{onKey:tap,onTap:tap,cleanup(){on=false;}};}},
+ {t:'أول لحن فوقتو',ic:'🎶',exp:`<p>دابا غادي نجمعو النغمات + الإيقاع. اللحن "في ضوء القمر" كيستعمل غير 3 أصابع: <b>1=دو، 2=ري، 3=مي</b>.</p><p>الميترونوم كيعدّ 4، ومن بعد ضغط على المفتاح <b style="color:var(--a3)">الأخضر</b> فاللحظة اللي كيضوي. اللحن المساعد كيعاونك تسمع فين خاصك تكون.</p>`,
+  start(){const sg=SONGS.find(s=>s.id==='clair');kbC.fingers(fingering(sg.n));ui.msg('اعزف اللحن فالوقت (خاصك 60% باش تنجح)');ui.prog(0,0);
+   ui.area().innerHTML=`<div class="strip" id="u5strip">${sg.n.map(([m])=>`<span>${nn(m,false)}</span>`).join('')}</div><div class="row"><button class="btn pri" id="u5go">▶ ابدأ</button><span class="fb" id="u5fb"></span></div>`;
+   $('#u5go').onclick=()=>playAlong(sg.n,kbC,{bpm:66,guide:true,strip:$('#u5strip'),fb:$('#u5fb'),onEnd:sc=>{$('#u5fb').innerHTML=`النتيجة: ${sc}%`;if(sc>=60)ui.done(`عزفتي أول لحن ديالك فالوقت (${sc}%) 🎉`);else $('#u5fb').innerHTML+=' — قريب! عاود 🔁';}});return{};}},
+ {t:'الكوردات (Accords)',ic:'🎼',exp:`<p>الكورد = <b>3 نغمات مع بعض</b>. القاعدة السهلة: خد نغمة، <b>فوّت وحدة</b>، خد وحدة، فوّت وحدة، خد وحدة. بالأصابع <b>1 – 3 – 5</b>.</p><p>مثلاً كورد <b>دو</b> = دو + مي + صول. 😊 الكوردات الكبيرة (دو، فا، صول) فيهم الفرح، والصغيرة (لا صغير) فيها شوية ديال الحزن.</p><p>🖱️ بالفأرة: ضغط على الثلاثة بسرعة وحدة مورا وحدة. بالتيليفون: حط 3 صوابع مرة وحدة.</p>`,
+  start(){const L=['C','F','G','Am'];let i=0;const show=()=>{markChord(L[i]);ui.msg(`اعزف كورد <b style="font-size:20px;color:var(--a4)">${CHAR[L[i]]} (${L[i]})</b> = ${VOICE[L[i]].map(m=>nn(m,false)).join(' + ')}`);ui.prog(i,L.length);};show();
+   return{onKey(){if(i>=L.length)return;if(hasChord(L[i])){cRecent=[];i++;if(i>=L.length){kbC.clear('next');kbC.fingers({});ui.prog(i,L.length);ui.done('عرفتي 4 كوردات — بيهم كتقدر تعزف مئات الأغاني!');}else{chime();setTimeout(show,250);}}},cleanup(){kbC.clear('next');}};}},
+ {t:'العزف مع الفرقة',ic:'🎸',exp:`<p>الفرقة غادي تعزف الكوردات: <b>دو ← صول ← لا صغير ← فا</b>، كل كورد 4 ضربات. نتا بدّل الكورد مع الفرقة.</p><p>👀 شوف الشريط التحت: "الكورد دابا" و"الجاي". المفاتيح الخضر فالبيانو هي الكورد اللي خاصك تعزف.</p>`,
+  start(){let started=false,barOk=false,prev=null;const res=[];ui.msg('اعزف الكورد الصحيح فكل مقياس (8 مقاييس، خاصك 5 صحاح)');ui.prog(0,8);
+   ui.area().innerHTML=`<div class="row" style="margin-top:8px"><button class="btn pri" id="u7go">▶ ابدأ مع الفرقة</button><span class="fb" id="u7fb"></span></div>`;
+   const onBar=e=>{if(!started)return;if(prev!=null){res.push(barOk);$('#uProg').textContent=`${res.filter(Boolean).length} صحاح / ${res.length}`;}
+     barOk=false;prev=e.bar;markChord(e.ch);$('#u7fb').innerHTML=`اعزف: <b style="color:var(--a4)">${CHAR[e.ch]}</b>`;
+     if(res.length>=8){started=false;band.listeners.delete(onBar);bandStop();kbC.clear('next');const ok=res.filter(Boolean).length;if(ok>=5)ui.done(`تبعتي الفرقة فـ ${ok}/8 مقاييس 🎸`);else $('#u7fb').innerHTML=`${ok}/8 — حاول تبدل الكورد بكري شوية ملي تشوف "الجاي" 🔁`;}};
+   $('#u7go').onclick=()=>{bandStop();setBandStyle(0);setBandBpm(72);band.hl=true;$('#bandHL').classList.add('on');res.length=0;prev=null;started=true;band.listeners.add(onBar);bandStart();};
+   return{onKey(){if(started&&band.cur&&hasChord(band.cur)&&!barOk){barOk=true;$('#u7fb').innerHTML='<span style="color:var(--a3)">✔ مزيان!</span>';}},cleanup(){started=false;band.listeners.delete(onBar);bandStop();}};}},
+ {t:'الارتجال (Improvisation)',ic:'✨',exp:`<p>الارتجال = تخترع لحن ديالك فالبلاصة! السر: اعزف النغمات <b style="color:#b9a6ff">الملوّنة بالبنفسجي</b> — هوما نغمات الكورد ديال الفرقة، وكيبانو ديما مزيانين.</p><p>الفرقة غادي تعزف الإيقاع <b>الأندلسي المغربي</b> (لا صغير ← صول ← فا ← مي). جرّب: نغمات قصيرة، نغمات طويلة، سكوت… واتبع الإحساس ديالك.</p>`,
+  start(){let n=0,inC=0,on=false;ui.msg('اعزف 40 نغمة بحرية — خاص 60% منهم يكونو من النغمات الملوّنة');ui.prog(0,40);
+   ui.area().innerHTML=`<div class="row" style="margin-top:8px"><button class="btn pri" id="u8go">▶ ابدأ الارتجال</button><span class="fb" id="u8fb"></span></div>`;
+   $('#u8go').onclick=()=>{bandStop();setBandStyle(2);setBandBpm(90);band.hl=true;$('#bandHL').classList.add('on');n=0;inC=0;on=true;bandStart();};
+   return{onKey(m){if(!on||!band.cur)return;n++;if(chordPcs(band.cur).includes(m%12))inC++;ui.prog(n,40);$('#u8fb').innerHTML=`🎯 ${Math.round(inC/n*100)}% فالكورد`;
+     if(n>=40){on=false;const r=inC/n;if(r>=.6){ui.done(`ارتجلتي لحن ديالك (${Math.round(r*100)}% فالكورد) — نتا دابا موسيقي! 🎉`);}else $('#u8fb').innerHTML+=' — ركّز على البنفسجي وعاود 🔁';}},cleanup(){on=false;bandStop();}};}}];
+function renderUnits(){const U=$('#units'),D=store.get('course',{});U.innerHTML='';UNITS.forEach((u,i)=>{const b=el(`<div class="unit ${D[i]?'done':''} ${i===curUnit?'cur':''}"><span class="n">${D[i]?'✓':i+1}</span>${u.ic} ${u.t}</div>`);b.onclick=()=>openUnit(i);U.appendChild(b);});}
+function openUnit(i){if(unitH&&unitH.cleanup)unitH.cleanup();paStop();uTimers.forEach(clearTimeout);uTimers=[];curUnit=clamp(i,0,UNITS.length-1);
+  ['next','good','bad'].forEach(c=>kbC.clear(c));kbC.fingers({});kbC.root.classList.remove('nolab');cRecent=[];
+  const u=UNITS[curUnit];$('#uTitle').textContent=`${u.ic} الخطوة ${curUnit+1}: ${u.t}`;$('#uExp').innerHTML=u.exp;$('#uArea').innerHTML='';$('#uProg').textContent='';
+  $('#uPrev').disabled=curUnit===0;$('#uNext').disabled=curUnit===UNITS.length-1;unitH=u.start()||{};renderUnits();}
+$('#uPrev').onclick=()=>openUnit(curUnit-1);$('#uNext').onclick=()=>openUnit(curUnit+1);
+(function(){const D=store.get('course',{});let f=UNITS.findIndex((u,i)=>!D[i]);openUnit(f<0?0:f);})();
+
+/* ========== GENERIC SCHOOL ========== */
+function School(pfx,units,key,reset){
+  const S={cur:0,h:null,timers:[],units};const g=id=>$('#'+pfx+id);
+  const ui={msg:h=>{g('Msg').innerHTML=h;},prog:(a,b)=>{g('Prog').textContent=b?`${a} / ${b}`:(a||'');},area:()=>g('Area'),T:(f,ms)=>S.timers.push(setTimeout(f,ms)),
+    done(txt){const D=store.get(key,{});D[S.cur]=true;store.set(key,D);chime();S.render();
+      g('Area').insertAdjacentHTML('beforeend',`<div class="donebox">✅ ${txt} ${S.cur<units.length-1?'<button class="btn sm pri" data-nx style="margin-right:8px">الخطوة الموالية ←</button>':'<br>🎓 كمّلتي هاد المدرسة! 👏'}</div>`);
+      const b=g('Area').querySelector('[data-nx]');if(b)b.onclick=()=>S.open(S.cur+1);}};
+  S.ui=ui;
+  S.render=()=>{const U=g('Units'),D=store.get(key,{});U.innerHTML='';units.forEach((u,i)=>{const b=el(`<div class="unit ${D[i]?'done':''} ${i===S.cur?'cur':''}"><span class="n">${D[i]?'✓':i+1}</span>${u.ic} ${u.t}</div>`);b.onclick=()=>S.open(i);U.appendChild(b);});};
+  S.stop=()=>{if(S.h&&S.h.cleanup)S.h.cleanup();S.h=null;paStop();daStop();S.timers.forEach(clearTimeout);S.timers.length=0;};
+  S.open=i=>{S.stop();S.cur=clamp(i,0,units.length-1);reset&&reset();const u=units[S.cur];g('Title').textContent=`${u.ic} الخطوة ${S.cur+1}: ${u.t}`;g('Exp').innerHTML=u.exp;g('Area').innerHTML='';g('Prog').textContent='';g('Prev').disabled=S.cur===0;g('Next').disabled=S.cur===units.length-1;S.h=u.start(ui)||{};S.render();};
+  g('Prev').onclick=()=>S.open(S.cur-1);g('Next').onclick=()=>S.open(S.cur+1);
+  S.init=()=>{const D=store.get(key,{});const f=units.findIndex((u,i)=>!D[i]);S.open(f<0?0:f);};
+  return S;}
+/* simple timed-tap helper shared by schools: count-in 4, then n beats */
+function tapTrial(ui,{bpm=76,n=8,label='اضرب'},onResult){const P=60/bpm,t0=ctx.currentTime+.5;const taps=[];
+  ui.area().insertAdjacentHTML('beforeend',`<div class="dots" data-tt>${'<span></span>'.repeat(4+n)}</div><p class="fb" data-ttfb style="text-align:center"></p>`);
+  const dots=[...ui.area().querySelectorAll('[data-tt] span')],fb=ui.area().querySelector('[data-ttfb]');
+  for(let b=0;b<4+n;b++){drum(b%4===0?'clickHi':'click',t0+b*P);ui.T(()=>{dots.forEach((d,k)=>{d.classList.toggle('lit',k===b);d.classList.toggle('first',k<4);});fb.textContent=b<4?`العدّ: ${b+1}`:label+'!';},(t0-ctx.currentTime+b*P)*1000);}
+  ui.T(()=>{const errs=[];for(let b=4;b<4+n;b++){const exp=t0+b*P;let best=null;taps.forEach(tp=>{const e=Math.abs(tp-exp);if(e<P/2&&(best==null||e<best))best=e;});errs.push(best==null?.3:best);}
+    const mean=Math.round(errs.reduce((a,b)=>a+b,0)/n*1000);dots.forEach(d=>d.parentNode&&d.parentNode.remove&&0);ui.area().querySelector('[data-tt]').remove();fb.remove();onResult(mean);},(t0-ctx.currentTime+(4+n)*P+.4)*1000);
+  return ()=>taps.push(ctx.currentTime);}
+
+/* ========== GUITAR: fretboard + school ========== */
+const GT=[40,45,50,55,59,64],GNAME=['مي (6)','لا (5)','ري (4)','صول (3)','سي (2)','مي (1)'];
+const GSH={Em:[[0,2,2,0,0,0],{1:2,2:3}],Am:[[-1,0,2,2,1,0],{2:2,3:3,4:1}],E:[[0,2,2,1,0,0],{1:2,2:3,3:1}],C:[[-1,3,2,0,1,0],{1:3,2:2,4:1}],G:[[3,2,0,0,0,3],{0:2,1:1,5:3}],D:[[-1,-1,0,2,3,2],{3:1,4:3,5:2}],Dm:[[-1,-1,0,2,3,1],{3:2,4:3,5:1}],F:[[-1,-1,3,2,1,1],{2:3,3:2,4:1,5:1}],A:[[-1,0,2,2,2,0],{2:1,3:2,4:3}]};
+function Fretboard(root,onEv){const NF=12,fb={shape:[0,0,0,0,0,0],target:null,tf:{}};
+  fb.render=()=>{root.innerHTML='';for(let s=5;s>=0;s--){const row=el(`<div class="frow" data-s="${s}"></div>`);const t=fb.target?fb.target[s]:null;
+      const nut=el(`<div class="fnut ${t===0?'tgo':''} ${t!=null&&t<0?'tgx':''}" data-s="${s}" data-f="0"><b>${fb.shape[s]<0?'✕':'○'}</b><span>${GNAME[s]}</span></div>`);row.appendChild(nut);
+      for(let f=1;f<=NF;f++){const c=el(`<div class="fcell" data-s="${s}" data-f="${f}"><i class="str" style="height:${1+(5-s)*.55}px"></i></div>`);const isT=t===f,has=fb.shape[s]===f;
+        if(has)c.appendChild(el(`<span class="dot ${isT?'ok':''}">${isT&&fb.tf[s]?fb.tf[s]:''}</span>`));else if(isT)c.appendChild(el(`<span class="ghost">${fb.tf[s]||''}</span>`));row.appendChild(c);}
+      root.appendChild(row);}
+    root.appendChild(el(`<div class="frow nums"><div class="fnut" style="background:#120e25;border:0;color:var(--mut)">الخانة ←</div>${Array.from({length:NF},(_,i)=>`<div class="fcell">${[3,5,7,9,12].includes(i+1)?'<em>●</em>':''}${i+1}</div>`).join('')}</div>`));};
+  fb.note=s=>fb.shape[s]<0?null:GT[s]+fb.shape[s];
+  fb.pluck=(s,vel=.9)=>{const m=fb.note(s);if(m==null)return;noteOn('guitar',mtof(m),vel);const r=root.querySelector(`.frow[data-s="${s}"]`);if(r){r.classList.remove('hit');void r.offsetWidth;r.classList.add('hit');}};
+  fb.strum=(down=true)=>{A();(down?[0,1,2,3,4,5]:[5,4,3,2,1,0]).forEach((s,k)=>setTimeout(()=>fb.pluck(s,down?.85:.7),k*24));onEv&&onEv('strum',down);};
+  fb.setTarget=(fr,fing)=>{fb.target=fr;fb.tf=fing||{};if(fr)fr.forEach((f,s)=>{if(f!=null&&f<0)fb.shape[s]=-1;else if(fb.shape[s]<0)fb.shape[s]=0;});fb.render();};
+  fb.clear=()=>{fb.shape=fb.shape.map((v,s)=>fb.target&&fb.target[s]!=null&&fb.target[s]<0?-1:0);fb.render();};
+  fb.matches=fr=>fr.every((f,s)=>f==null||f<0||fb.shape[s]===f);
+  root.addEventListener('pointerdown',e=>{const c=e.target.closest('[data-f]');if(!c||c.dataset.s==null)return;e.preventDefault();A();const s=+c.dataset.s,f=+c.dataset.f;
+    if(f===0){if(fb.shape[s]<0)fb.shape[s]=0;fb.render();fb.pluck(s);onEv&&onEv('nut',s,fb.shape[s]);return;}
+    fb.shape[s]=fb.shape[s]===f?0:f;fb.render();fb.pluck(s);onEv&&onEv('fret',s,fb.shape[s]);});
+  fb.render();return fb;}
+const gfb=Fretboard($('#fboard'),(type,a,b)=>{if(gS&&gS.h&&gS.h.onEv)gS.h.onEv(type,a,b);});
+$('#gDown').onclick=()=>gfb.strum(true);$('#gUp').onclick=()=>gfb.strum(false);$('#gClear').onclick=()=>gfb.clear();
+STYLES.push({t:'🇲🇦 أندلسي سهل للقيثارة: لا ص – صول – لا ص – مي',bpm:76,prog:['Am','G','Am','E'],dr:{doum:[0,8],tek:[2,6,12],ka:[4,10,14]},bass:[0,8],cs:[0,8],ci:'piano'});
+$('#bandStyle').appendChild(el(`<option value="${STYLES.length-1}">${STYLES[STYLES.length-1].t}</option>`));
+const GSTYLE=STYLES.length-1;
+function chordTask(ui,list,doneTxt){let i=0;const show=()=>{const[fr,fg]=GSH[list[i]];gfb.setTarget(fr,fg);ui.msg(`حط الصوابع فالدوائر الخضرا ديال كورد <b style="font-size:19px;color:var(--a4)">${CHAR[list[i]]} (${list[i]})</b>، ومن بعد اضرب ⬇`);ui.prog(i,list.length);};show();
+  return{onEv(t){if(t!=='strum'||i>=list.length)return;if(gfb.matches(GSH[list[i]][0])){i++;ui.prog(i,list.length);if(i>=list.length){gfb.setTarget(null);ui.done(doneTxt);}else{ui.msg('✔ مزيان! الكورد الموالي…');ui.T(show,700);}}
+    else ui.msg(`باقي ما مضبوطش 🤏 — الصوابع خاصهم يكونو فالدوائر الخضرا ديال <b>${CHAR[list[i]]}</b>. الوتر اللي فيه ✕ ما كيتضربش.`);}};}
+const GUNITS=[
+ {t:'تعرّف على القيثارة',ic:'🎸',exp:`<p>القيثارة فيها <b>6 أوتار</b>. كنحسبوهم من <b>الرقيق (1)</b> حتى <b>الغليظ (6)</b>. الأسماء من الغليظ للرقيق: <b>مي – لا – ري – صول – سي – مي</b>.</p><p>🖐️ اليد اليمنى كتضرب الأوتار فوق الفتحة، واليد اليسرى كتضغط على <b>الخانات</b> فالزند. فالرسم: الوتر 1 الرقيق هو اللي الفوق.</p>`,
+  start(ui){gfb.setTarget(null);gfb.clear();let ok=0,tg=-1;const nx=()=>{let s;do{s=Math.floor(Math.random()*6);}while(s===tg);tg=s;ui.msg(`اضرب <b style="font-size:19px;color:var(--a4)">الوتر رقم ${6-s}</b> (ضغط على الاسم ديالو على اليسار، ولا الرقم ${6-s} فلوحة المفاتيح)`);};ui.prog(0,6);nx();
+   return{onEv(t,s){if(t!=='nut'||ok>=6)return;if(s===tg){ok++;ui.prog(ok,6);if(ok>=6)ui.done('عرفتي الأوتار الستة 🎸');else nx();}else ui.msg(`هادا الوتر ${6-s} (${GNAME[s]}) — قلّب على <b style="color:var(--a4)">الوتر ${6-tg}</b>`);}};}},
+ {t:'الخانات والنغمات',ic:'🎯',exp:`<p>ملي كتضغط على <b>خانة</b>، النغمة كتطلع <b>نص صوت</b>. ضغط ب<b>رأس الصبع</b> قريب من الحديدة (من الجهة ديال الجسم)، ماشي فوقها.</p><p>الصبع = رقم الخانة فهاد التمرين: الخانة 1 ← الصبع 1 (السبابة)، الخانة 3 ← الصبع 3 (البنصر). غادي نعزفو: <b>دو – ري – مي – فا – صول</b>.</p>`,
+  start(ui){gfb.clear();const P=[[4,1],[4,3],[5,0],[5,1],[5,3],[5,1],[5,0],[4,3],[4,1]];let i=0;
+   const show=()=>{const[s,f]=P[i];const t=[null,null,null,null,null,null];t[s]=f;gfb.setTarget(t,f?{[s]:f}:{});ui.msg(`<b style="font-size:19px;color:var(--a4)">${nn(GT[s]+f,false)}</b> = الوتر ${6-s}، ${f?`الخانة ${f} بالصبع ${f}`:'مفتوح (بلا صبع — ضغط على الاسم)'}`);ui.prog(i,P.length);};show();
+   return{onEv(t,s,f){if(i>=P.length||t==='strum')return;const[ts,tf]=P[i];if(s===ts&&f===tf){i++;if(i>=P.length){gfb.setTarget(null);ui.prog(i,P.length);ui.done('عزفتي أول سلم فالقيثارة 🎶');}else show();}}};}},
+ {t:'أول كورد: مي صغير',ic:'✌️',exp:`<p>الكورد = بزاف ديال الأوتار مع بعض. <b>مي صغير (Em)</b> هو أسهل كورد: <b>جوج صوابع</b> فقط!</p><p>الصبع 2 فالخانة 2 ديال الوتر 5، والصبع 3 فالخانة 2 ديال الوتر 4. من بعد اضرب كاع الأوتار بضربة وحدة لتحت ⬇.</p><p>💡 ضغط على الدوائر الخضرا باش تحط الصوابع.</p>`,
+  start(ui){gfb.clear();return chordTask(ui,['Em','Em'],'أول كورد ديالك! 🎉');}},
+ {t:'كوردات الأندلسي: لا صغير و مي',ic:'🇲🇦',exp:`<p>جوج كوردات كيعطيو الطابع <b>الأندلسي المغربي</b>: <b>لا صغير (Am)</b> و<b>مي (E)</b>. لاحظ: عندهم نفس الشكل تقريباً — غير كتهبط الصوابع بوتر واحد!</p><p>فـ <b>لا صغير</b> الوتر 6 ما كيتضربش (✕).</p>`,
+  start(ui){gfb.clear();return chordTask(ui,['Am','E','Am','E'],'تقدر دابا تعزف جو أندلسي 🌙');}},
+ {t:'دو و صول',ic:'🎵',exp:`<p>بـ <b>دو (C)</b> و<b>صول (G)</b> مع لا صغير ومي، كتقدر تعزف بزاف ديال الأغاني.</p><p>صول فيه 3 صوابع متفرقين: الصبع 2 فالوتر 6، الصبع 1 فالوتر 5، والصبع 3 فالوتر 1. خود وقتك 🙂</p>`,
+  start(ui){gfb.clear();return chordTask(ui,['C','G','C','G'],'عندك دابا 5 كوردات! 💪');}},
+ {t:'الضرب بالإيقاع',ic:'🥁',exp:`<p>اليد اليمنى هي "الطبّال" ديال القيثارة. أول إيقاع: <b>ضربة لتحت ⬇ مع كل نبضة</b> (1 – 2 – 3 – 4).</p><p>خلي المعصم مرتاح بحال إلا كتنفض الما من يدك. استعمل الزر ⬇ ولا Space.</p>`,
+  start(ui){gfb.setTarget(GSH.Em[0],GSH.Em[1]);ui.msg('حط مي صغير، سمع 4 ديال العدّ، ومن بعد اضرب ⬇ مع الكليك 8 مرات');let tap=null;
+   ui.area().innerHTML=`<div class="row" style="margin-top:8px"><button class="btn pri" data-start>▶ ابدأ</button></div>`;
+   ui.area().querySelector('[data-start]').onclick=()=>{A();tap=tapTrial(ui,{bpm:72,n:8,label:'اضرب ⬇'},mean=>{tap=null;if(mean<120){ui.msg(`معدل الفرق ${mean}ms 👌`);ui.done('اليد اليمنى ولات كتعرف الإيقاع!');}else ui.msg(`معدل الفرق ${mean}ms — عاود وسمع الكليك مزيان 🔁`);});};
+   return{onEv(t){if(t==='strum'&&tap)tap();}};}},
+ {t:'العزف مع الفرقة',ic:'🎶',exp:`<p>الفرقة غادي تعزف إيقاع أندلسي: <b>لا صغير ← صول ← لا صغير ← مي</b> (كل كورد 4 ضربات). بدّل الصوابع واضرب مرة على الأقل فكل مقياس.</p><p>👀 الدوائر الخضرا كتبين الكورد ديال دابا، والشريط التحت كيقولك شنو الجاي.</p>`,
+  start(ui){let on=false,ok=false,prev=null;const res=[];ui.msg('تبّع الفرقة 8 مقاييس (خاصك 5 صحاح)');
+   ui.area().innerHTML=`<div class="row" style="margin-top:8px"><button class="btn pri" data-start>▶ ابدأ مع الفرقة</button><span class="fb" data-fb></span></div>`;const fbx=ui.area().querySelector('[data-fb]');
+   const onBar=e=>{if(!on)return;if(prev!=null){res.push(ok);ui.prog(`${res.filter(Boolean).length} صحاح / ${res.length}`);}ok=false;prev=e.bar;gfb.setTarget(GSH[e.ch][0],GSH[e.ch][1]);fbx.innerHTML=`دابا: <b style="color:var(--a4)">${CHAR[e.ch]}</b>`;
+     if(res.length>=8){on=false;band.listeners.delete(onBar);bandStop();gfb.setTarget(null);const n=res.filter(Boolean).length;if(n>=5)ui.done(`عزفتي مع الفرقة: ${n}/8 🎸🔥`);else fbx.innerHTML=`${n}/8 — بدّل الصوابع بكري شوية، وعاود 🔁`;}};
+   ui.area().querySelector('[data-start]').onclick=()=>{bandStop();setBandStyle(GSTYLE);res.length=0;prev=null;on=true;band.listeners.add(onBar);bandStart();};
+   return{onEv(t){if(t==='strum'&&on&&band.cur&&GSH[band.cur]&&gfb.matches(GSH[band.cur][0])&&!ok){ok=true;fbx.innerHTML='<span style="color:var(--a3)">✔ مزيان!</span>';}},cleanup(){on=false;band.listeners.delete(onBar);bandStop();}};}}];
+const gS=School('g',GUNITS,'gcourse',()=>{gfb.setTarget(null);});
+
+/* ========== DARBUKA: drum + timed patterns + school ========== */
+const TOK={D:'doum',T:'tek',K:'ka'},TAR={doum:'دوم',tek:'تك',ka:'كا'};
+const da={active:false,notes:[],timers:[],box:null,fb:null,onEnd:null};
+function daStop(){da.timers.forEach(clearTimeout);da.timers=[];da.active=false;}
+function dHit(h){A();drum(h);const z=$(`#darb [data-h="${h}"]`);if(z){z.classList.add('hit');setTimeout(()=>z.classList.remove('hit'),110);}if(da.active){daKey(h);return;}if(dS&&dS.h&&dS.h.onHit)dS.h.onHit(h);}
+$('#darb').addEventListener('pointerdown',e=>{const z=e.target.closest('[data-h]');if(!z)return;e.preventDefault();dHit(z.dataset.h);});
+function patHTML(pat,bars){const tk=pat.trim().split(/\s+/);let h='';for(let b=0;b<bars;b++)tk.forEach((t,i)=>{h+=`<span class="${t==='.'?'rest':TOK[t]} ${i%2===0?'on':''}">${t==='.'?'·':TAR[TOK[t]]}<small>${i%2===0?(i/2+1):'و'}</small></span>`;});return h;}
+function drumAlong(pat,{bars=2,bpm=80,guide=true,backing=false,box,fb,onEnd}){daStop();A();const tk=pat.trim().split(/\s+/),st=60/bpm/2,beat=60/bpm,t0=ctx.currentTime+.4+4*beat;
+  Object.assign(da,{box,fb,onEnd,active:true});da.notes=[];const total=bars*tk.length;
+  for(let b=0;b<bars;b++)tk.forEach((t,i)=>{const k=b*tk.length+i;if(t!=='.')da.notes.push({h:TOK[t],t:t0+k*st,k,res:null});});
+  for(let i=0;i<4;i++){const ti=t0-(4-i)*beat;drum(i===0?'clickHi':'click',ti);da.timers.push(setTimeout(()=>{if(fb)fb.innerHTML=`<span style="color:var(--a4)">العدّ: ${i+1}</span>`;},Math.max(0,(ti-ctx.currentTime)*1000)));}
+  for(let k=0;k<total;k+=2)drum('click',t0+k*st,.3);
+  if(guide)da.notes.forEach(n=>drum(n.h,n.t,.3));
+  if(backing){const prog=['Am','Dm','E','Am'],bd=tk.length*st;for(let b=0;b<bars;b++){const ch=prog[b%4];chordMidis(ch).forEach(m=>tone('organ',mtof(m),t0+b*bd,bd*.97,.2));tone('bass',mtof(36+CH[ch][0]),t0+b*bd,bd*.45,.8);tone('bass',mtof(36+CH[ch][0]),t0+b*bd+bd/2,bd*.4,.6);}}
+  const cells=box?[...box.querySelectorAll('span')]:[];cells.forEach(c=>c.classList.remove('cur','okp','okg','miss'));
+  for(let k=0;k<total;k++)da.timers.push(setTimeout(()=>{cells.forEach((c,j)=>c.classList.toggle('cur',j===k));if(k===0&&fb)fb.textContent='🪘 دابا!';},Math.max(0,(t0+k*st-ctx.currentTime-.05)*1000)));
+  da.notes.forEach(n=>da.timers.push(setTimeout(()=>{if(!n.res&&cells[n.k])cells[n.k].classList.add('miss');},(n.t+.22-ctx.currentTime)*1000)));
+  da.timers.push(setTimeout(daFinish,(t0+total*st-ctx.currentTime+.4)*1000));}
+function daKey(h){const now=ctx.currentTime;let best=null;for(const n of da.notes){if(n.res)continue;const dt=now-n.t;if(Math.abs(dt)<.2&&(!best||Math.abs(dt)<Math.abs(now-best.t)))best=n;}
+  const cells=da.box?da.box.querySelectorAll('span'):[];
+  if(best&&best.h===h){const dt=now-best.t;best.res=Math.abs(dt)<.1?'p':'g';if(cells[best.k])cells[best.k].classList.add(best.res==='p'?'okp':'okg');if(da.fb)da.fb.innerHTML=best.res==='p'?'<span style="color:var(--a3)">✨ فالوقت!</span>':`<span style="color:#7fdccc">👍 ${dt<0?'بكري شوية':'معطّل شوية'}</span>`;}
+  else if(best){if(da.fb)da.fb.innerHTML=`<span style="color:var(--bad)">✘ هادي ${TAR[h]} — خاصها ${TAR[best.h]}</span>`;}
+  else if(da.fb)da.fb.innerHTML='<span style="color:var(--bad)">✘ ماشي وقتها</span>';}
+function daFinish(){if(!da.active)return;const n=da.notes.length,p=da.notes.filter(x=>x.res==='p').length,g=da.notes.filter(x=>x.res==='g').length,sc=Math.round((p+g*.6)/n*100);da.active=false;da.timers.forEach(clearTimeout);da.timers=[];if(da.box)da.box.querySelectorAll('span').forEach(c=>c.classList.remove('cur'));if(da.onEnd)da.onEnd(sc,{p,g,miss:n-p-g});}
+function patTask(ui,{pat,bars=2,bpm=80,backing=false,pass=60,doneTxt}){ui.msg(`اعزف الإيقاع مع الميترونوم (خاصك ${pass}% باش تنجح)`);
+  ui.area().innerHTML=`<div class="dpat" data-pat>${patHTML(pat,bars)}</div><div class="row"><button class="btn pri" data-start>▶ ابدأ</button><span class="lbl">السرعة</span><select data-sp><option value="0.75">بطيء 🐢</option><option value="1" selected>عادي</option><option value="1.2">سريع</option></select><label class="lbl"><input type="checkbox" data-gd checked> 🔊 الإيقاع المساعد</label><span class="fb" data-fb></span></div>`;
+  const A_=ui.area(),fbx=A_.querySelector('[data-fb]');
+  A_.querySelector('[data-start]').onclick=()=>drumAlong(pat,{bars,bpm:Math.round(bpm*+A_.querySelector('[data-sp]').value),guide:A_.querySelector('[data-gd]').checked,backing,box:A_.querySelector('[data-pat]'),fb:fbx,
+    onEnd:(sc,st)=>{fbx.innerHTML=`النتيجة: <b>${sc}%</b> (فالوقت ${st.p} · قريب ${st.g} · فاتوك ${st.miss})`;if(sc>=pass&&!A_.querySelector('.donebox'))ui.done(doneTxt+` (${sc}%)`);else if(sc<pass)fbx.innerHTML+=' — جرّب "بطيء" 🔁';}});
+  return{};}
+const DUNITS=[
+ {t:'الضربات الثلاث',ic:'🪘',exp:`<p>الدربوكة عندها 3 ديال الأصوات الأساسية:</p><p>🔴 <b>دوم</b>: ضربة فالوسط باليد اليمنى، ورفع اليد بسرعة باش يرنّ — صوت <b>غليظ</b>.<br>🟠 <b>تك</b>: ضربة بأطراف صوابع اليمنى على الحافة — صوت <b>حاد</b>.<br>🟡 <b>كا</b>: نفس التك ولكن باليد <b>اليسرى</b> — صوت <b>خفيف</b>.</p><p>⌨️ فالحاسوب: <b>Space</b> = دوم، <b>J</b> = تك، <b>F</b> = كا.</p>`,
+  start(ui){const L=['doum','tek','ka','doum','tek','ka','tek','doum','ka'].sort(()=>Math.random()-.5);let i=0;const show=()=>{ui.msg(`اضرب: <b style="font-size:22px;color:var(--a4)">${TAR[L[i]]}</b>`);ui.prog(i,L.length);};show();
+   return{onHit(h){if(i>=L.length)return;if(h===L[i]){i++;if(i>=L.length){ui.prog(i,L.length);ui.done('عرفتي الضربات الثلاث 🪘');}else show();}else ui.msg(`هادي <b>${TAR[h]}</b> — خاصك <b style="font-size:22px;color:var(--a4)">${TAR[L[i]]}</b>`);}};}},
+ {t:'القراءة: دوم و تك',ic:'📖',exp:`<p>الإيقاع كيتكتب بخانات. كل خانة = <b>نص ضربة</b>. كنعدّو: <b>1 و 2 و 3 و 4 و</b>. الخانة اللي فيها <b>·</b> = سكوت.</p><p>نبداو بسهل: دوم فـ 1، تك فـ 2، دوم فـ 3، تك فـ 4.</p>`,
+  start(ui){return patTask(ui,{pat:'D . T . D . T .',bars:2,bpm:76,doneTxt:'قريتي وعزفتي أول إيقاع'});}},
+ {t:'إيقاع المقسوم',ic:'💃',exp:`<p><b>المقسوم</b> هو أشهر إيقاع شرقي — كاين فبزاف ديال الأغاني العربية والمغربية.</p><p>الحفظ: <b>دوم تك · تك دوم · تك ·</b> — ردّدو بفمك قبل ما تعزف!</p>`,
+  start(ui){return patTask(ui,{pat:'D T . T D . T .',bars:2,bpm:80,doneTxt:'عزفتي المقسوم'});}},
+ {t:'إيقاع البلدي',ic:'🌾',exp:`<p><b>البلدي</b> قريب من المقسوم، ولكن كيبدا بـ <b>جوج دوم</b>: <b>دوم دوم · تك دوم · تك ·</b>. فيه قوة وطابع شعبي.</p>`,
+  start(ui){return patTask(ui,{pat:'D D . T D . T .',bars:2,bpm:80,doneTxt:'عزفتي البلدي'});}},
+ {t:'إيقاع السعيدي',ic:'🐎',exp:`<p><b>السعيدي</b>: <b>دوم تك · دوم دوم · تك ·</b>. لاحظ جوج دوم فالوسط — هوما اللي كيعطيوه الحركة.</p>`,
+  start(ui){return patTask(ui,{pat:'D T . D D . T .',bars:2,bpm:84,doneTxt:'عزفتي السعيدي'});}},
+ {t:'الحشو بالكا',ic:'✨',exp:`<p>العازفين كيعمرو السكوت بضربات خفيفة باليد اليسرى (<b>كا</b>) — هادشي كيسمّيوه <b>الحشو</b> وكيخلي الإيقاع حي.</p><p>المقسوم بالحشو: <b>دوم تك كا تك دوم كا تك كا</b>. بدل اليدين: يمنى، يمنى، يسرى…</p>`,
+  start(ui){return patTask(ui,{pat:'D T K T D K T K',bars:2,bpm:72,doneTxt:'زيّنتي المقسوم بالحشو 🔥'});}},
+ {t:'العزف مع الموسيقى',ic:'🎶',exp:`<p>دابا نتا هو الطبّال ديال الفرقة! الموسيقى غادي تعزف كوردات (لا صغير – ري صغير – مي – لا صغير) وانت كتعطيها الإيقاع: <b>المقسوم</b> 4 مقاييس.</p><p>💡 طفي "الإيقاع المساعد" ملي تحس براسك واثق.</p>`,
+  start(ui){return patTask(ui,{pat:'D T . T D . T .',bars:4,bpm:88,backing:true,doneTxt:'ولّيتي طبّال الفرقة 🪘🎉'});}}];
+const dS=School('d',DUNITS,'dcourse');
+
+/* school switching */
+let curSch='piano';
+function showSchool(k){curSch=k;$$('[data-sch]').forEach(b=>b.classList.toggle('on',b.dataset.sch===k));['piano','guitar','darb'].forEach(x=>$('#sch-'+x).style.display=x===k?'':'none');
+  if(k==='guitar'&&!gS.h)gS.init();if(k==='darb'&&!dS.h)dS.init();}
+$$('[data-sch]').forEach(b=>b.onclick=()=>showSchool(b.dataset.sch));
+
+/* ========== WORKSHOP ========== */
+/* 1) play along with an audio file */
+let wsSrc=null,wsAn=null,wsBuf=null,wsLast=0,wsA=null,wsB=null;
+const wsAudio=$('#wsAudio');
+$('#wsFile').onchange=e=>{const f=e.target.files[0];if(!f)return;wsAudio.src=URL.createObjectURL(f);$('#wsName').textContent='🎵 '+f.name;wsA=wsB=null;$('#wsLoop').textContent='بلا تكرار';
+  A();if(!wsSrc){try{wsSrc=ctx.createMediaElementSource(wsAudio);wsSrc.connect(master);wsAn=ctx.createAnalyser();wsAn.fftSize=2048;wsSrc.connect(wsAn);wsBuf=new Float32Array(2048);}catch(err){wsSrc=null;}}
+  wsAudio.playbackRate=+$('#wsRate').value;wsAudio.play().catch(()=>{});};
+wsAudio.addEventListener('play',()=>{A();});
+$('#wsRate').onchange=e=>{wsAudio.playbackRate=+e.target.value;try{wsAudio.preservesPitch=true;}catch(_){}};
+const fmt=t=>`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+const loopLbl=()=>{$('#wsLoop').textContent=wsA!=null&&wsB!=null?`🔁 ${fmt(wsA)} ← ${fmt(wsB)}`:wsA!=null?`A = ${fmt(wsA)}`:'بلا تكرار';};
+$('#wsA').onclick=()=>{wsA=wsAudio.currentTime;if(wsB!=null&&wsB<=wsA)wsB=null;loopLbl();};
+$('#wsB').onclick=()=>{if(wsA==null){toast('حدد البداية A أولاً');return;}wsB=wsAudio.currentTime;if(wsB<=wsA){wsB=null;toast('B خاصها تكون من بعد A');}loopLbl();};
+$('#wsAB').onclick=()=>{wsA=wsB=null;loopLbl();};
+wsAudio.addEventListener('timeupdate',()=>{if(wsA!=null&&wsB!=null&&wsAudio.currentTime>=wsB)wsAudio.currentTime=wsA;});
+function wsPitch(){if(!wsAn||wsAudio.paused)return;wsAn.getFloatTimeDomainData(wsBuf);const f=detectPitch(wsBuf,ctx.sampleRate);if(f>65&&f<1100)$('#wsNote').textContent=nn(69+12*Math.log2(f/440));}
+
+/* 2) lyrics + melody composer */
+const comp={title:'',lyrics:'',segs:[],maq:0,root:60,bpm:92,inst:'piano',rhy:''};
+let cSel=0,cStepOn=false,cTimers=[];
+const MQW=MAQAMS;
+(function initComposer(){MQW.forEach((q,i)=>$('#cMaq').appendChild(el(`<option value="${i}">${q[0]}${q[1].some(x=>!Number.isInteger(x))?' (فيه ربع الصوت)':''}</option>`)));
+  [[55,'صول'],[57,'لا'],[59,'سي'],[60,'دو'],[62,'ري'],[64,'مي'],[65,'فا']].forEach(([m])=>$('#cRoot').appendChild(el(`<option value="${m}">${nn(m)}</option>`)));$('#cRoot').value=60;
+  $('#cRhy').appendChild(el('<option value="">بلا إيقاع</option>'));Object.keys(PRESETS).filter(k=>!k.startsWith('فارغ')).forEach(k=>$('#cRhy').appendChild(el(`<option>${k}</option>`)));$('#cRhy').value='مقسوم (شرقي)';})();
+function readSettings(){comp.title=$('#cTitle').value.trim();comp.maq=+$('#cMaq').value;comp.root=+$('#cRoot').value;comp.bpm=+$('#cBpm').value;comp.inst=$('#cInst').value;comp.rhy=$('#cRhy').value;}
+function parseLyrics(){const txt=$('#cLyrics').value;comp.lyrics=txt;const old=comp.segs;const out=[];let k=0;
+  txt.split('\n').map(l=>l.trim()).filter(Boolean).forEach((line,li)=>line.split(/\s+/).forEach((w,wi)=>w.split('-').filter(Boolean).forEach((sy,si,arr)=>{const o=old[k]||{};out.push({s:sy,l:li,w:wi,end:si===arr.length-1,m:o.m??null,d:o.d??1});k++;})));
+  comp.segs=out;if(cSel>=out.length)cSel=0;}
+function scaleMidi(deg){const off=MQW[comp.maq][1],o=Math.floor(deg/7),i=((deg%7)+7)%7;return comp.root+off[i]+12*o;}
+function genMelody(){readSettings();parseLyrics();if(!comp.segs.length){toast('كتب الكلمات أولاً ✍️');return;}
+  const lines=[...new Set(comp.segs.map(s=>s.l))];
+  lines.forEach((l,idx)=>{const segs=comp.segs.filter(s=>s.l===l),n=segs.length,last=idx===lines.length-1;const endDeg=last?0:(idx%2===0?4:0);let d=[0,2,4][Math.floor(Math.random()*3)];
+    segs.forEach((sg,i)=>{if(i===n-1)d=endDeg;else if(i===n-2)d=endDeg+(Math.random()<.5?1:-1);else{const steps=[-2,-1,-1,0,1,1,1,2];d=clamp(d+steps[Math.floor(Math.random()*steps.length)],-1,8);}
+      sg.m=scaleMidi(d);sg.d=i===n-1?2:(Math.random()<.25&&i<n-2?.5:1);});});
+  renderGrid();playComp();}
+function renderGrid(){const G=$('#cGrid');G.innerHTML='';const lines=[...new Set(comp.segs.map(s=>s.l))];
+  lines.forEach(l=>{const row=el('<div class="cline"></div>');comp.segs.forEach((sg,i)=>{if(sg.l!==l)return;const b=el(`<button class="seg ${i===cSel?'sel':''} ${sg.m!=null&&!Number.isInteger(sg.m)?'q':''}" data-i="${i}"><b>${sg.s}</b><span>${sg.m==null?'؟':qName(sg.m)}</span><em data-d>${sg.d}</em></button>`);
+    b.onclick=e=>{if(e.target.closest('[data-d]')){const D=[.5,1,1.5,2,3,4];sg.d=D[(D.indexOf(sg.d)+1)%D.length];renderGrid();return;}cSel=i;renderGrid();if(sg.m!=null)tone(comp.inst,mtof(sg.m),null,.5);};row.appendChild(b);});G.appendChild(row);});
+  if(!comp.segs.length)G.innerHTML='<p class="mut" style="font-size:14px">كتب الكلمات الفوق، ومن بعد ضغط "🎲 اقترح لحن" ولا "🎹 لحّن بيدّك".</p>';}
+$('#cLyrics').addEventListener('input',()=>{parseLyrics();renderGrid();});
+['#cMaq','#cRoot'].forEach(s=>$(s).addEventListener('change',()=>{readSettings();markScale();}));
+$('#cBpm').oninput=e=>{$('#cBpmL').textContent=e.target.value;};
+function markScale(){const pcs=MQW[comp.maq][1].filter(Number.isInteger).map(o=>(comp.root+o)%12);kbW.root.querySelectorAll('.key').forEach(k=>k.classList.toggle('sc',pcs.includes(+k.dataset.m%12)));}
+const wv={};
+function kbWDown(m){if(wv[m])wv[m].stop();wv[m]=noteOn(comp.inst||'piano',mtof(m));kbW.press(m,true);
+  if(cStepOn&&comp.segs.length){comp.segs[cSel].m=m;cSel=Math.min(cSel+1,comp.segs.length-1);renderGrid();}}
+const kbW=Keyboard($('#kbW'),55,79,kbWDown,m=>{if(wv[m]){wv[m].stop();delete wv[m];}kbW.press(m,false);});
+kbW.kcBase=60;
+$('#cStep').onclick=e=>{readSettings();parseLyrics();cStepOn=!cStepOn;e.currentTarget.classList.toggle('on',cStepOn);$('#cKbWrap').style.display=cStepOn?'':'none';markScale();renderGrid();if(cStepOn&&!comp.segs.length)toast('كتب الكلمات أولاً ✍️');};
+function cStop(){cTimers.forEach(clearTimeout);cTimers=[];$$('.seg.play').forEach(s=>s.classList.remove('play'));$('#cKar').innerHTML='';}
+function playComp(){readSettings();if(!comp.segs.length){toast('كتب الكلمات أولاً ✍️');return;}if(comp.segs.some(s=>s.m==null)){toast('باقي مقاطع بلا نغمة (؟) — اقترح لحن ولا لحّن بيدك');return;}
+  cStop();A();const beat=60/comp.bpm,t0=ctx.currentTime+.25;let t=0;
+  comp.segs.forEach((sg,i)=>{tone(comp.inst,mtof(sg.m),t0+t*beat,sg.d*beat*.92,.9);const at=t;
+    cTimers.push(setTimeout(()=>{$$('.seg').forEach(b=>b.classList.toggle('play',+b.dataset.i===i));const line=comp.segs.filter(s=>s.l===sg.l);$('#cKar').innerHTML=line.map(s=>`<span class="${s===sg?'on':''}">${s.s}${s.end?' ':''}</span>`).join('');},(at*beat+.25)*1000));t+=sg.d;});
+  if(comp.rhy){const p=PRESETS[comp.rhy],sd=beat/4,steps=Math.ceil(t*4/16)*16;for(let k=0;k<steps;k++)for(const d in p)if(d!=='bpm'&&p[d].includes(k%16))drum(d,t0+k*sd,.6);}
+  cTimers.push(setTimeout(cStop,(t*beat+.8)*1000));}
+$('#cGen').onclick=genMelody;$('#cPlay').onclick=playComp;$('#cStop').onclick=cStop;
+function compData(){readSettings();parseLyrics();return{title:comp.title||'أغنيتي',lyrics:comp.lyrics,segs:comp.segs.map(({s,l,w,end,m,d})=>({s,l,w,end,m,d})),maq:comp.maq,root:comp.root,bpm:comp.bpm,inst:comp.inst,rhy:comp.rhy};}
+function loadComp(c){$('#cTitle').value=c.title||'';$('#cLyrics').value=c.lyrics||'';$('#cMaq').value=c.maq||0;$('#cRoot').value=c.root||60;$('#cBpm').value=c.bpm||92;$('#cBpmL').textContent=c.bpm||92;$('#cInst').value=c.inst||'piano';$('#cRhy').value=c.rhy||'';
+  readSettings();comp.lyrics=c.lyrics||'';comp.segs=(c.segs||[]).map(x=>({...x}));cSel=0;renderGrid();markScale();}
+function renderSaved(){const L=store.get('comps',[]),B=$('#cSaved');B.innerHTML=L.length?'<div class="lbl" style="margin-bottom:6px">💾 المحفوظات:</div>':'';
+  L.forEach((c,i)=>{const r=el(`<div class="saved"><b style="flex:1">🎵 ${c.title}</b><button class="btn sm">📂 حلّ</button><button class="btn sm">🗑</button></div>`);const[o,d]=r.querySelectorAll('button');o.onclick=()=>{loadComp(c);toast('تحلّات: '+c.title);};d.onclick=()=>{const L2=store.get('comps',[]);L2.splice(i,1);store.set('comps',L2);renderSaved();};B.appendChild(r);});}
+$('#cSave').onclick=()=>{const c=compData();if(!c.segs.length){toast('ما كاين ما يتحفظ');return;}const L=store.get('comps',[]);const i=L.findIndex(x=>x.title===c.title);if(i>=0)L[i]=c;else L.unshift(c);store.set('comps',L);renderSaved();toast('💾 تحفظات فهاد الجهاز');};
+$('#cToLesson').onclick=()=>{const c=compData();if(!c.segs.length||c.segs.some(s=>s.m==null)){toast('كمّل اللحن أولاً');return;}if(c.segs.some(s=>!Number.isInteger(s.m))){toast('فيها ربع الصوت — ما كتعزفش فالبيانو. بدّل المقام (عجم، نهوند، كرد، حجاز)');return;}
+  let n=c.segs.map(s=>[s.m,s.d]);const lo=Math.min(...n.map(x=>x[0])),hi=Math.max(...n.map(x=>x[0]));let sh=0;while(lo+sh<60)sh+=12;while(hi+sh>84&&lo+sh-12>=60)sh-=12;n=n.map(([m,d])=>[m+sh,d]);
+  const my=store.get('mysongs',[]);const id='my_'+c.title;const sg={id,my:1,t:c.title,s:'✍️ من تأليفك',lvl:1,bpm:c.bpm,n};const i=my.findIndex(x=>x.id===id);if(i>=0)my[i]=sg;else my.push(sg);store.set('mysongs',my);renderSongs();toast('📚 تزادت للدروس!');};
+$('#cExport').onclick=()=>{const c=compData();if(!c.segs.length){toast('ما كاين ما يتصدّر');return;}saveFile(new Blob([JSON.stringify(c,null,1)],{type:'application/json'}),(c.title||'song').replace(/[\\/:*?"<>|]/g,'')+'.json');};
+$('#cImport').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const c=JSON.parse(await f.text());if(!c.segs)throw 0;loadComp(c);toast('⬆️ تستوردات: '+(c.title||''));}catch(_){toast('الملف ماشي صالح');}e.target.value='';};
+$('#cNew').onclick=()=>{cStop();loadComp({});comp.segs=[];renderGrid();};
+renderGrid();renderSaved();
+
+/* ========== TALENT TESTS ========== */
+const TESTS=[
+ {id:'ear',ic:'👂',t:'الأذن الموسيقية',d:'واش كتفرّق بين نغمتين قريبين بزاف؟ 10 جولات كتصعاب.',fn:testEar},
+ {id:'mem',ic:'🧠',t:'الذاكرة اللحنية',d:'عاود اللحن اللي سمعتي… وكل مرة كيطوال.',fn:testMem},
+ {id:'rhy',ic:'🥁',t:'الإحساس بالإيقاع',d:'ضرب مع الإيقاع، ومن بعد كمّل بوحدك بلا صوت.',fn:testRhy},
+ {id:'voc',ic:'🎤',t:'دقة الصوت',d:'سمع نغمة وغنّيها (خاص الميكروفون).',fn:testVoc}];
+const ADVICE={ear:'أذن دقيقة 👂: مناسبة للعود والكمان والآلات اللي بلا خانات، وللتلحين.',mem:'ذاكرة لحنية قوية 🧠: كتحفظ الألحان بسرعة — البيانو والعزف السماعي مناسبين ليك.',rhy:'إحساس قوي بالإيقاع 🥁: الدربوكة، البندير، الدرامز، أو الرقص الإيقاعي.',voc:'صوت مضبوط 🎤: الغناء، الإنشاد، والكورال.'};
+function getRes(){return store.get('talent',{});}
+function setRes(id,score){const R=getRes();R[id]={last:score,best:Math.max(score,(R[id]&&R[id].best)||0),date:Date.now()};store.set('talent',R);}
+function overall(){const R=getRes(),v=TESTS.map(t=>R[t.id]&&R[t.id].best).filter(x=>x!=null);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):null;}
+let testAbort=0;
+function renderTests(){const T=$('#tests'),R=getRes();T.innerHTML='';TESTS.forEach(t=>{const r=R[t.id];const c=el(`<div class="card test feat" style="margin:0"><div class="big">${t.ic}</div><h3 style="margin:6px 0 4px">${t.t}</h3><div class="mut" style="font-size:14px;min-height:42px">${t.d}</div><div class="row" style="margin-top:8px;justify-content:space-between"><button class="btn sm pri">${r?'↺ عاود':'▶ ابدأ'}</button>${r?`<span class="score">${r.best}%</span>`:''}</div></div>`);c.onclick=()=>startTest(t);T.appendChild(c);});}
+function startTest(t){testAbort++;rt.active=false;pitchSink=null;const A_=$('#testArea');A_.style.display='block';A_.scrollIntoView({behavior:'smooth',block:'start'});t.fn(A_,testAbort);}
+function endTest(id,score,area,extra=''){setRes(id,score);chime();area.innerHTML=`<h3>${TESTS.find(t=>t.id===id).ic} النتيجة</h3><div class="verdict">${score}%</div><div class="bar"><i style="width:${score}%"></i></div><p class="mut">${extra}</p><div class="row"><button class="btn" id="tAgain">↺ عاود</button><button class="btn pri" id="tNext">الاختبار الموالي ←</button></div>`;
+  const i=TESTS.findIndex(t=>t.id===id);$('#tAgain').onclick=()=>startTest(TESTS[i]);$('#tNext').onclick=()=>startTest(TESTS[(i+1)%TESTS.length]);renderTests();renderResults();}
+/* 1. ear */
+function testEar(area,tok){const diffs=[100,80,60,50,40,30,25,20,15,10];let round=0,ok=0,cur=null;
+  const next=()=>{if(tok!==testAbort)return;if(round>=diffs.length){const sc=Math.round(ok/diffs.length*100);endTest('ear',sc,area,`جاوبتي صحيح على ${ok} من ${diffs.length}. آخر جولات فيها فرق ديال 10–15 سنت فقط (عُشر نصف صوت) — صعيبة حتى على المحترفين!`);return;}
+    const base=56+Math.floor(Math.random()*12),hiFirst=Math.random()<.5;cur={base,hiFirst,d:diffs[round]};
+    area.innerHTML=`<h3>👂 الأذن الموسيقية — جولة ${round+1}/${diffs.length}</h3><p class="mut">غادي تسمع جوج نغمات. شكون فيهم الأعلى (الأحدّ)؟ <span class="chip">الفرق: ${diffs[round]} سنت</span></p><div class="row"><button class="btn" id="eRep">🔊 عاود سمع</button></div><div class="row" style="margin-top:12px"><button class="btn pri" data-a="1" style="flex:1;justify-content:center;padding:16px">الأولى أعلى ①</button><button class="btn pri" data-a="2" style="flex:1;justify-content:center;padding:16px">الثانية أعلى ②</button></div><p class="mut" id="eFb"></p>`;
+    $('#eRep').onclick=play;area.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>answer(+b.dataset.a));play();};
+  const play=()=>{A();const f=mtof(cur.base),f2=f*Math.pow(2,cur.d/1200),t=ctx.currentTime+.1;const [a,b]=cur.hiFirst?[f2,f]:[f,f2];tone('organ',a,t,.6,.8);tone('organ',b,t+.85,.6,.8);};
+  const answer=a=>{const correct=(a===1)===cur.hiFirst;if(correct){ok++;}area.querySelectorAll('[data-a]').forEach(b=>b.disabled=true);$('#eFb').innerHTML=correct?'<b style="color:var(--a3)">✔ صحيح</b>':'<b style="color:var(--bad)">✘ لا</b>';round++;setTimeout(next,700);};
+  next();}
+/* 2. melodic memory (simon) */
+function testMem(area,tok){const notes=[60,64,67,72],cols=['#ff5fa2','#ffb547','#22d3b6','#7c5cff'];let seqn=[],inp=0,busy=true,level=0;
+  area.innerHTML=`<h3>🧠 الذاكرة اللحنية</h3><p class="mut" id="mMsg">سمع وشوف…</p><div class="simon">${notes.map((n,i)=>`<button style="--c:${cols[i]}" data-i="${i}"></button>`).join('')}</div><div class="row" style="justify-content:center"><span class="chip">الطول: <b id="mLen">0</b></span></div>`;
+  const btn=i=>area.querySelector(`.simon [data-i="${i}"]`);
+  const flash=(i,d=.35)=>{tone('piano',mtof(notes[i]),null,d);const b=btn(i);b.classList.add('lit');setTimeout(()=>b.classList.remove('lit'),d*900);};
+  const playSeq=async()=>{busy=true;$('#mMsg').textContent='🎧 سمع وشوف…';await sleep(600);for(const i of seqn){if(tok!==testAbort)return;flash(i);await sleep(Math.max(330,600-seqn.length*25));}busy=false;inp=0;$('#mMsg').textContent='دابا نتا: عاود نفس الترتيب';};
+  const grow=()=>{seqn.push(Math.floor(Math.random()*4));if(seqn.length<3)return grow();$('#mLen').textContent=seqn.length;playSeq();};
+  area.querySelectorAll('.simon button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();if(busy||tok!==testAbort)return;const i=+b.dataset.i;flash(i,.3);
+    if(i!==seqn[inp]){busy=true;buzz();const sc=clamp(Math.round((level-2)/8*100),0,100);setTimeout(()=>endTest('mem',sc,area,`حفظتي لحن فيه <b>${level}</b> نغمات. (3 = بداية، 6 = مزيان، 10+ = ذاكرة استثنائية)`),700);return;}
+    inp++;if(inp===seqn.length){level=seqn.length;busy=true;$('#mMsg').textContent='✔ مزيان!';if(level>=12){setTimeout(()=>endTest('mem',100,area,'وصلتي 12 نغمة! ذاكرة استثنائية 🔥'),600);return;}setTimeout(grow,700);}}));
+  grow();}
+/* 3. rhythm */
+const rt={active:false,taps:[],start:0,period:0};
+function rtTap(){if(!rt.active)return;rt.taps.push(ctx.currentTime);drum('tek');const t=$('#rtPad');if(t){t.classList.add('hit');setTimeout(()=>t.classList.remove('hit'),80);}}
+function testRhy(area,tok){area.innerHTML=`<h3>🥁 الإحساس بالإيقاع</h3><p class="mut">غادي تسمع 4 ضربات للعدّ (1-2-3-4)، من بعد <b>ضرب معاهم</b> 4 ضربات، ومن بعد الصوت كيتقطع و<b>كمّل بوحدك</b> 4 ضربات أخرى بنفس السرعة. (ضغط على الدائرة أو زر Space)</p><div class="row" style="justify-content:center"><button class="btn pri" id="rtGo">▶ ابدأ</button></div><button class="tap" id="rtPad">اضرب هنا</button><div class="dots" id="rtDots">${'<span></span>'.repeat(12)}</div><p class="mut" id="rtMsg" style="text-align:center"></p>`;
+  $('#rtPad').addEventListener('pointerdown',e=>{e.preventDefault();rtTap();});
+  $('#rtGo').onclick=()=>{A();$('#rtGo').disabled=true;const bpm=80+Math.floor(Math.random()*30),P=60/bpm,t0=ctx.currentTime+.6;rt.taps=[];rt.period=P;rt.start=t0;rt.active=true;
+    const dots=$$('#rtDots span');for(let b=0;b<12;b++){if(b<8)drum(b%4===0?'clickHi':'click',t0+b*P);setTimeout(()=>{if(tok!==testAbort)return;dots.forEach((d,k)=>d.classList.toggle('lit',k===b&&b<8));if(b<8)dots[b].classList.toggle('first',b<4);$('#rtMsg').textContent=b<4?`العدّ… ${b+1}`:b<8?'اضرب مع الإيقاع!':'🤫 كمّل بوحدك…';},(t0-ctx.currentTime+b*P)*1000);}
+    setTimeout(()=>{if(tok!==testAbort)return;rt.active=false;
+      let errs=[];for(let b=4;b<12;b++){const exp=t0+b*P;let best=null;rt.taps.forEach(tp=>{const e=Math.abs(tp-exp);if(e<P/2&&(best==null||e<best))best=e;});errs.push(best==null?.25:best);}
+      const extra=Math.max(0,rt.taps.filter(tp=>tp>t0+3.5*P).length-8);const mean=errs.reduce((a,b)=>a+b,0)/errs.length*1000+extra*20;
+      const inErr=errs.slice(0,4).reduce((a,b)=>a+b,0)/4*1000,soloErr=errs.slice(4).reduce((a,b)=>a+b,0)/4*1000;
+      const sc=clamp(Math.round(100-(mean-25)/(160-25)*100),0,100);
+      endTest('rhy',sc,area,`معدل الفرق: <b>${Math.round(mean)}</b> ميلي ثانية (السرعة كانت ${bpm} BPM). مع الصوت: ${Math.round(inErr)}ms · بوحدك: ${Math.round(soloErr)}ms. أقل من 30ms = دقة ديال عازف محترف.`);},(t0-ctx.currentTime+12*P+.5)*1000);};}
+/* 4. voice */
+function testVoc(area,tok){area.innerHTML=`<h3>🎤 دقة الصوت</h3><p class="mut">اختار نوع صوتك باش نختارو نغمات مريحة ليك. غادي تسمع 3 نغمات، وكل مرة غنّيها بـ "آآآ" ملي يبان "غنّي دابا".</p><div class="row"><button class="btn" data-b="45">👨 رجل</button><button class="btn" data-b="55">👩 امرأة</button><button class="btn" data-b="58">🧒 طفل</button></div><div class="notebig" id="vcBig" style="margin-top:16px;font-size:44px"></div><p class="mut" id="vcMsg" style="text-align:center"></p>`;
+  area.querySelectorAll('[data-b]').forEach(b=>b.onclick=async()=>{area.querySelectorAll('[data-b]').forEach(x=>x.disabled=true);
+    if(!(await micStart())){$('#vcMsg').innerHTML='الميكروفون ما متاحش هنا 🙁 — حلّ التطبيق فصفحة مستقلة (GitHub Pages) وعاود.';return;}
+    const base=+b.dataset.b,targets=[base+Math.floor(Math.random()*3),base+4+Math.floor(Math.random()*2),base+7+Math.floor(Math.random()*2)];const scores=[];
+    for(let k=0;k<3;k++){if(tok!==testAbort)return;const m=targets[k];$('#vcBig').textContent=nn(m);$('#vcMsg').textContent=`🎧 سمع النغمة ${k+1}/3…`;tone('organ',mtof(m),null,1.3,.9);await sleep(1600);
+      $('#vcMsg').textContent='🎤 غنّي دابا!';pitchSink=[];await sleep(2600);const got=pitchSink;pitchSink=null;
+      const cs=got.map(f=>{let c=1200*Math.log2(f/mtof(m));c-=1200*Math.round(c/1200);return Math.abs(c);}).sort((a,b)=>a-b);
+      const err=cs.length>=5?cs[Math.floor(cs.length/2)]:200;const s=clamp(Math.round(100-(err-12)/(100-12)*100),0,100);scores.push(s);
+      $('#vcMsg').innerHTML=cs.length>=5?`الفرق: ${Math.round(err)} سنت → ${s}%`:'ما سمعتش صوتك مزيان 🤔';await sleep(1100);}
+    const sc=Math.round(scores.reduce((a,b)=>a+b,0)/3);endTest('voc',sc,area,`نتائج النغمات: ${scores.join('% · ')}%. أقل من 20 سنت فرق = غناء مضبوط جداً.`);});}
+function renderResults(){const R=getRes(),ov=overall(),box=$('#results');
+  if(ov==null){box.innerHTML='<h3>📊 ملفك الموسيقي</h3><p class="mut" style="margin:0">دوز اختبار واحد على الأقل باش يبان ملفك هنا.</p>';return;}
+  const verdict=ov>=85?'موهبة واعدة 🌟':ov>=65?'قدرات قوية 💪':ov>=40?'بداية مشجعة 🌱':'كل فنان بدا من هنا 🎈';
+  const best=TESTS.filter(t=>R[t.id]).sort((a,b)=>R[b.id].best-R[a.id].best);
+  box.innerHTML=`<h3>📊 ملفك الموسيقي</h3><div class="verdict">${verdict} <span class="mut" style="font-size:18px">(${ov}%)</span></div>${TESTS.map(t=>`<div class="res-row"><span>${t.ic} ${t.t}</span><div class="bar"><i style="width:${R[t.id]?R[t.id].best:0}%"></i></div><b>${R[t.id]?R[t.id].best+'%':'—'}</b></div>`).join('')}
+  <h3 style="margin-top:14px">🧭 نصيحتنا ليك</h3><p class="mut" style="margin:0">${best.filter(t=>R[t.id].best>=60).map(t=>ADVICE[t.id]).join('<br>')||'ركّز على التمارين اليومية: الدروس فالبيانو، الميترونوم، وتحدي النغمة. وعاود الاختبارات من بعد أسبوع — غادي تشوف الفرق!'}</p>
+  ${TESTS.some(t=>!R[t.id])?`<p class="mut" style="font-size:13px">باقي ليك: ${TESTS.filter(t=>!R[t.id]).map(t=>t.t).join('، ')}</p>`:''}`;}
+renderTests();renderResults();
+
+/* ========== main loop ========== */
+let lastT=0;
+function frame(){requestAnimationFrame(frame);if(!ctx)return;const now=ctx.currentTime;
+  while(seq.queue.length&&seq.queue[0][1]<=now){const[st]=seq.queue.shift();if(seq.playing)setPlayhead(st);}
+  while(band.queue.length&&band.queue[0].t<=now){const e=band.queue.shift();if(band.on)bandEvent(e);}
+  while(metro.queue.length&&metro.queue[0][1]<=now){const[b]=metro.queue.shift();if(metro.on)setMetBeat(b);}
+  if(now-wsLast>.08){wsLast=now;wsPitch();}
+  if(mic.on&&now-mic.last>.045){const dt=mic.last?now-mic.last:.05;mic.last=now;analyzeMic(Math.min(dt,.2));}}
+requestAnimationFrame(frame);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){Object.keys(pv).forEach(m=>pUp(+m,kbMain));}});
+show(location.hash.slice(1)||'home');
+/* PWA: install + offline (works on GitHub Pages / any https host) */
+let deferredInstall=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;$('#installBtn').style.display='';});
+$('#installBtn').onclick=async()=>{if(!deferredInstall)return;deferredInstall.prompt();try{await deferredInstall.userChoice;}catch(_){}deferredInstall=null;$('#installBtn').style.display='none';};
+window.addEventListener('appinstalled',()=>{$('#installBtn').style.display='none';toast('✅ تثبّت التطبيق');});
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
+</script>
+</body>
+</html>
